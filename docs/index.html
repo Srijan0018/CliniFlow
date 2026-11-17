@@ -433,6 +433,7 @@ li[data-icon="lift"] .ico, li[data-icon="stairs"] .ico { background: #4c3b64; co
     <div class="walk" id="walk" hidden aria-live="polite">
       <div class="walk-top">
         <span class="walk-head" id="wkHead">In 8 m</span>
+        <button class="btn small" id="wkVoice" type="button" aria-pressed="true">Voice on</button>
         <button class="btn" id="wkStop">Stop</button>
       </div>
       <p class="walk-text" id="wkText"></p>
@@ -486,6 +487,7 @@ li[data-icon="lift"] .ico, li[data-icon="stairs"] .ico { background: #4c3b64; co
       <div class="wc-row"><b id="wcHead"></b><span id="wcText"></span></div>
       <div class="wc-row wc-btns">
         <button class="btn primary" id="wcFloor" hidden>I'm on floor 3</button>
+        <button class="btn" id="wcVoice" type="button" aria-pressed="true">Voice on</button>
         <button class="btn" id="wcStop">Stop</button>
       </div>
     </div>
@@ -530,7 +532,7 @@ window.addEventListener('error', function (e) {
 <script src="js/graph.js?v=16"></script>
 <script src="js/interior.js?v=16"></script>
 <script src="js/app.js?v=18"></script>
-<script src="js/tracking.js?v=17"></script>
+<script src="js/tracking.js?v=19"></script>
 <script src="js/voice.js?v=16"></script>
 </body>
 </html>

@@ -80,12 +80,32 @@
   // ---------- tracking state ----------
   const T = { on: false, d: 0, stage: 0, steps: 0, holding: null, arrived: false, gotSensor: false, wake: null, gps: false };
   let lastGpsD = null;
+  let voiceOn = true, lastSpokenKey = '', lastGpsDirection = '';
+
+  function speakNavigation(text) {
+    if (!voiceOn || !text || !window.speechSynthesis || !window.SpeechSynthesisUtterance) return;
+    try {
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'en-IN';
+      window.speechSynthesis.speak(utterance);
+    } catch (e) { /* speech is optional */ }
+  }
+
+  function updateVoiceButton() {
+    ['wkVoice', 'wcVoice'].forEach((id) => {
+      const b = $(id);
+      if (!b) return;
+      b.textContent = voiceOn ? 'Voice on' : 'Voice off';
+      b.setAttribute('aria-pressed', String(voiceOn));
+    });
+  }
 
   function reset() {
     const r = NAV.getRoute();
     route = buildRoute(r.res, r.steps);
     T.d = 0; T.stage = 0; T.steps = 0; T.holding = null; T.arrived = false;
-    T.gps = false; lastGpsD = null;
+    T.gps = false; lastGpsD = null; lastSpokenKey = ''; lastGpsDirection = '';
     $('walkBtn').hidden = !route;
     if (T.on && !route) stop();
     if (T.on) update(true);
@@ -222,6 +242,11 @@
     $('wcFloor').hidden = !T.holding;
     if (T.holding) $('wcFloor').textContent = fb.textContent;
     $('walk').classList.toggle('done', T.arrived);
+    const speechKey = `${T.stage}:${cur}:${T.holding ? 'hold' : ''}:${T.arrived ? 'arrived' : 'walking'}`;
+    if (speechKey !== lastSpokenKey) {
+      lastSpokenKey = speechKey;
+      speakNavigation(T.arrived ? 'You have arrived.' : T.holding ? main : main);
+    }
   }
 
   // ---------- step detection ----------
@@ -289,6 +314,12 @@
       : gpsDelta > 0
         ? 'GPS confirms you are going the right way'
         : 'GPS says you are going the wrong way — turn around';
+    const direction = gpsDelta !== null && gpsDelta < -2 ? 'wrong' : gpsDelta !== null && gpsDelta > 2 ? 'right' : 'steady';
+    if (direction !== lastGpsDirection) {
+      lastGpsDirection = direction;
+      if (direction === 'wrong') speakNavigation('You appear to be going the wrong way. Turn around.');
+      if (direction === 'right') speakNavigation('GPS confirms you are going the right way.');
+    }
     $('wkSensor').textContent = `${confidence} · ±${Math.round(acc)} m${T.gotSensor ? ' + steps' : ''}`;
     update(false);
   }
@@ -315,7 +346,9 @@
     $('walk').hidden = false; $('walkBtn').hidden = true; $('walkChip').hidden = false;
     if (NAV.closeDrawer) NAV.closeDrawer();
     $('wkSensor').textContent = 'Waiting for motion sensor…';
-    T.gotSensor = false; T.gps = false; lastGpsD = null; det.base = null; det.armed = true; det.n = 0; det.t0 = 0; det.hz = 0;
+    T.gotSensor = false; T.gps = false; lastGpsD = null; lastGpsDirection = ''; det.base = null; det.armed = true; det.n = 0; det.t0 = 0; det.hz = 0;
+    lastSpokenKey = '';
+    updateVoiceButton();
     $('wkSim').hidden = true;
     setTimeout(() => {
       if (T.on && !T.gotSensor) { if (!T.gps) $('wkSensor').textContent = 'No motion sensor found. Use "+1 step" to test.'; $('wkSim').hidden = false; }
@@ -337,10 +370,14 @@
     try { T.wake && T.wake.release(); } catch (e) { /* ignore */ }
     document.getElementById('panel').classList.remove('walking');
     $('walk').hidden = true; $('walkBtn').hidden = !route; $('walkChip').hidden = true;
+    try { window.speechSynthesis && window.speechSynthesis.cancel(); } catch (e) { /* speech is optional */ }
     NAV.setFollow(false); NAV.showYou(null);
   }
 
   $('walkBtn').onclick = start;
+  const toggleVoice = () => { voiceOn = !voiceOn; updateVoiceButton(); if (!voiceOn) { try { window.speechSynthesis && window.speechSynthesis.cancel(); } catch (e) { /* speech is optional */ } } };
+  $('wkVoice').onclick = toggleVoice;
+  $('wcVoice').onclick = toggleVoice;
   $('wkStop').onclick = stop;
   $('wkFloor').onclick = passStop;
   $('wcFloor').onclick = passStop;
