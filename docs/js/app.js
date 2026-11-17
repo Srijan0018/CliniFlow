@@ -55,6 +55,17 @@
   // ---------- state ----------
   const state = { from: null, to: null, floor: 'G', all: false, outside: true, res: null, steps: [], activeStep: -1, focusBlock: null, focusPoint: null, autoStart: true };
   const blockById = (id) => (B.blocks || []).find((b) => b.id === id);
+  function spansCampusRoute() {
+    if (!B.blocks || !state.res) return false;
+    const zones = new Set();
+    let hasWalkway = false;
+    state.res.path.forEach((n) => {
+      const zone = n.zone || (n.ref && n.ref.block);
+      if (zone) zones.add(zone);
+      if (n.zone === 'walkway') hasWalkway = true;
+    });
+    return hasWalkway || zones.size > 1;
+  }
 
   // ---------- three.js scene ----------
   const mapEl = $('map'), labelsEl = $('labels');
@@ -503,7 +514,22 @@
   const DETAIL = new Set(['furn', 'glass', 'paint', 'iline']);
   function applyFloorVisibility() {
     const f = fidx(state.floor);
-    shell.visible = state.outside;
+    const campusRoute = spansCampusRoute();
+    shell.visible = state.outside || campusRoute;
+    shell.traverse((obj) => {
+      if (!obj.material) return;
+      const materials = Array.isArray(obj.material) ? obj.material : [obj.material];
+      materials.forEach((material) => {
+        if (material.userData && material.userData.cliniFlowBaseOpacity === undefined) {
+          material.userData.cliniFlowBaseOpacity = material.opacity === undefined ? 1 : material.opacity;
+        }
+        const baseOpacity = material.userData ? material.userData.cliniFlowBaseOpacity : 1;
+        const opacity = state.outside ? baseOpacity : campusRoute ? baseOpacity * 0.2 : 0;
+        material.transparent = opacity < 1;
+        material.opacity = opacity;
+        material.needsUpdate = true;
+      });
+    });
     $('outsideHint').hidden = !state.outside;
     const fbk = B.blocks && !state.outside ? state.focusBlock : null;
     mats.forEach(({ m, base, fi, kind, block }) => {
@@ -782,12 +808,18 @@
       state.outside = false;
       state.all = floors.size > 1; // show the whole trip first; tap a step to zoom to its floor
       if (B.blocks) {
-        // campus: open straight on the destination floor, zoomed into the destination's block
+        // Cross-building trips stay in a campus context so both buildings and the connecting walkway remain visible.
         const end = state.res.path[state.res.path.length - 1];
-        state.all = false;
-        state.floor = end.floor;
-        state.focusBlock = (end.ref && end.ref.block) || (end.zone && end.zone !== 'walkway' ? end.zone : null);
-        state.focusPoint = [end.x, end.y];
+        if (spansCampusRoute()) {
+          state.all = true;
+          state.focusBlock = null;
+          state.focusPoint = null;
+        } else {
+          state.all = false;
+          state.floor = end.floor;
+          state.focusBlock = (end.ref && end.ref.block) || (end.zone && end.zone !== 'walkway' ? end.zone : null);
+          state.focusPoint = [end.x, end.y];
+        }
       }
     } else if (state.to) state.floor = state.to.floor;
     else if (state.from) state.floor = state.from.floor;
@@ -1211,7 +1243,7 @@
   fromBox.set(u.from || byId.get(DEF.from));
   toBox.set(u.to || (u.from ? null : byId.get(DEF.to)));
   compute();
-  state.outside = true; // open on the outside view of the block; tap it to go inside
+  if (!(B.blocks && state.res && spansCampusRoute())) state.outside = true; // keep the campus overview for an unstarted route
   refreshView(false);
   // like Google Maps: try to find where you are (only if no start came from a QR code / link)
   if (GEO && !u.from) setTimeout(() => locateMe(true), 700);

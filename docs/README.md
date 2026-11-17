@@ -2,6 +2,7 @@
 
 Opens in any phone browser. Pick, say or scan where you are and where you want to go. The route is drawn
 in 3D across floors, with turn-by-turn directions and a live GPS location dot.
+Routes between campus buildings keep the covered-walkway path visible while showing the connected building floors over the campus model.
 
 | Page | Building |
 |---|---|
