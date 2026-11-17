@@ -1,0 +1,3663 @@
+{
+ "_readme": [
+  "Edit this file to match your hospital. No code changes needed.",
+  "available: set false for departments your hospital does not have (the assistant will say so politely).",
+  "floor: -1 basement, 0 ground, 1, 2, ...   place: block / wing / room, shown and spoken as-is.",
+  "directions: optional per-language text that replaces the automatic reply, e.g. {\"en\": \"Take the lift to floor 2 and turn left.\"}",
+  "map_node: optional id of this place in your app's map, returned to the app for routing.",
+  "keywords: words people say. Matching checks every language's list, so code-mixed speech works.",
+  "Tulu (tcy) texts are drafts - have a native Tulu speaker check them."
+ ],
+ "messages": {
+  "found": {
+   "en": "{name} is {floor}, {place}.",
+   "hi": "{name} {floor} पर है, {place}।",
+   "kn": "{name} {floor}ಯಲ್ಲಿದೆ, {place}.",
+   "ml": "{name} {floor}യിലാണ്, {place}.",
+   "tcy": "{name} {floor}ಡ್ ಉಂಡು, {place}."
+  },
+  "floor": {
+   "en": {
+    "-1": "in the basement",
+    "0": "on the ground floor",
+    "n": "on floor {n}"
+   },
+   "hi": {
+    "-1": "बेसमेंट",
+    "0": "भूतल",
+    "n": "मंज़िल नंबर {n}"
+   },
+   "kn": {
+    "-1": "ನೆಲಮಾಳಿಗೆ",
+    "0": "ನೆಲ ಮಹಡಿ",
+    "n": "{n}ನೇ ಮಹಡಿ"
+   },
+   "ml": {
+    "-1": "ബേസ്മെന്റ് നില",
+    "0": "താഴത്തെ നില",
+    "n": "{n}-ാം നില"
+   },
+   "tcy": {
+    "-1": "ಬೇಸ್‌ಮೆಂಟ್",
+    "0": "ಗ್ರೌಂಡ್ ಫ್ಲೋರ್",
+    "n": "{n}ನೇ ಫ್ಲೋರ್"
+   }
+  },
+  "not_understood": {
+   "en": "Sorry, I didn't catch that. Which department are you looking for?",
+   "hi": "माफ़ कीजिए, मैं समझ नहीं पाया। आप कौन सा विभाग ढूंढ रहे हैं?",
+   "kn": "ಕ್ಷಮಿಸಿ, ಅರ್ಥವಾಗಲಿಲ್ಲ. ನೀವು ಯಾವ ವಿಭಾಗವನ್ನು ಹುಡುಕುತ್ತಿದ್ದೀರಿ?",
+   "ml": "ക്ഷമിക്കണം, മനസ്സിലായില്ല. ഏത് വിഭാഗമാണ് നിങ്ങൾ അന്വേഷിക്കുന്നത്?",
+   "tcy": "ಕ್ಷಮಿಸಾಲೆ, ಅರ್ಥ ಆಯಿಜಿ. ಈರ್ ವಾ ವಿಭಾಗೊನು ನಾಡೊಂದುಲ್ಲರ್?"
+  },
+  "unavailable": {
+   "en": "Sorry, {name} is not available in this hospital. Please ask at the reception.",
+   "hi": "माफ़ कीजिए, इस अस्पताल में {name} उपलब्ध नहीं है। कृपया रिसेप्शन पर पूछें।",
+   "kn": "ಕ್ಷಮಿಸಿ, ಈ ಆಸ್ಪತ್ರೆಯಲ್ಲಿ {name} ಲಭ್ಯವಿಲ್ಲ. ದಯವಿಟ್ಟು ರಿಸೆಪ್ಷನ್‌ನಲ್ಲಿ ಕೇಳಿ.",
+   "ml": "ക്ഷമിക്കണം, ഈ ആശുപത്രിയിൽ {name} ലഭ്യമല്ല. ദയവായി റിസപ്ഷനിൽ ചോദിക്കുക.",
+   "tcy": "ಕ್ಷಮಿಸಾಲೆ, ಈ ಆಸ್ಪತ್ರೆಡ್ {name} ಇಜ್ಜಿ. ರಿಸೆಪ್ಷನ್‌ಡ್ ಕೇನುಲೆ."
+  },
+  "emergency_prefix": {
+   "en": "If this is an emergency, please tell the nearest staff member immediately. ",
+   "hi": "अगर यह आपातकाल है, तो तुरंत नज़दीकी स्टाफ़ को बताएं। ",
+   "kn": "ಇದು ತುರ್ತು ಪರಿಸ್ಥಿತಿಯಾಗಿದ್ದರೆ, ತಕ್ಷಣ ಹತ್ತಿರದ ಸಿಬ್ಬಂದಿಗೆ ತಿಳಿಸಿ. ",
+   "ml": "ഇത് അത്യാഹിതമാണെങ്കിൽ, ഉടൻ അടുത്തുള്ള ജീവനക്കാരെ അറിയിക്കുക. ",
+   "tcy": "ಇಂದು ಎಮರ್ಜೆನ್ಸಿ ಆಂಡ, ಬೇಗ ಕೈತಲ್ದ ಸ್ಟಾಫ್‌ಗ್ ಪನ್ಲೆ. "
+  }
+ },
+ "departments": [
+  {
+   "id": "emergency",
+   "type": "department",
+   "available": true,
+   "verified": false,
+   "floor": 0,
+   "place": "Main Block, left wing",
+   "map_node": "emergency",
+   "names": {
+    "en": "Emergency",
+    "hi": "इमरजेंसी विभाग",
+    "kn": "ತುರ್ತು ಚಿಕಿತ್ಸಾ ವಿಭಾಗ",
+    "ml": "അത്യാഹിത വിഭാഗം",
+    "tcy": "ಎಮರ್ಜೆನ್ಸಿ"
+   },
+   "keywords": {
+    "en": [
+     "emergency",
+     "casualty",
+     "accident",
+     "trauma",
+     "er",
+     "urgent"
+    ],
+    "hi": [
+     "इमरजेंसी",
+     "आपातकाल",
+     "आपातकालीन",
+     "कैजुअल्टी",
+     "एक्सीडेंट",
+     "ट्रॉमा"
+    ],
+    "kn": [
+     "ತುರ್ತು",
+     "ಎಮರ್ಜೆನ್ಸಿ",
+     "ಕ್ಯಾಶುವಾಲಿಟಿ",
+     "ಆಕ್ಸಿಡೆಂಟ್",
+     "ಅಪಘಾತ"
+    ],
+    "ml": [
+     "അത്യാഹിത",
+     "എമർജൻസി",
+     "കാഷ്വാലിറ്റി",
+     "ആക്സിഡന്റ്",
+     "അപകട"
+    ],
+    "tcy": [
+     "ಎಮರ್ಜೆನ್ಸಿ"
+    ]
+   },
+   "directions": {}
+  },
+  {
+   "id": "reception",
+   "type": "facility",
+   "available": true,
+   "verified": false,
+   "floor": 0,
+   "place": "Main Block, left wing",
+   "map_node": "reception",
+   "names": {
+    "en": "Reception",
+    "hi": "रिसेप्शन",
+    "kn": "ರಿಸೆಪ್ಷನ್",
+    "ml": "റിസപ്ഷൻ",
+    "tcy": "ರಿಸೆಪ್ಷನ್"
+   },
+   "keywords": {
+    "en": [
+     "reception",
+     "help desk",
+     "enquiry",
+     "inquiry",
+     "information",
+     "front desk"
+    ],
+    "hi": [
+     "रिसेप्शन",
+     "पूछताछ",
+     "हेल्प डेस्क",
+     "इन्क्वायरी",
+     "जानकारी"
+    ],
+    "kn": [
+     "ರಿಸೆಪ್ಷನ್",
+     "ವಿಚಾರಣೆ",
+     "ಹೆಲ್ಪ್ ಡೆಸ್ಕ್",
+     "ಎನ್ಕ್ವೈರಿ",
+     "ಮಾಹಿತಿ"
+    ],
+    "ml": [
+     "റിസപ്ഷൻ",
+     "അന്വേഷണ",
+     "ഹെൽപ്പ് ഡെസ്ക്",
+     "എൻക്വയറി"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "opd_registration",
+   "type": "department",
+   "available": true,
+   "verified": false,
+   "floor": 0,
+   "place": "Main Block, left wing",
+   "map_node": "opd_registration",
+   "names": {
+    "en": "OPD Registration",
+    "hi": "ओपीडी रजिस्ट्रेशन",
+    "kn": "ಒಪಿಡಿ ನೋಂದಣಿ",
+    "ml": "ഒപി രജിസ്ട്രേഷൻ",
+    "tcy": "ಒಪಿಡಿ ರಿಜಿಸ್ಟ್ರೇಷನ್"
+   },
+   "keywords": {
+    "en": [
+     "opd",
+     "registration",
+     "register",
+     "token",
+     "out patient",
+     "outpatient",
+     "appointment",
+     "card"
+    ],
+    "hi": [
+     "ओपीडी",
+     "रजिस्ट्रेशन",
+     "पंजीकरण",
+     "पर्ची",
+     "टोकन",
+     "अपॉइंटमेंट"
+    ],
+    "kn": [
+     "ಒಪಿಡಿ",
+     "ಓಪಿಡಿ",
+     "ರಿಜಿಸ್ಟ್ರೇಷನ್",
+     "ನೋಂದಣಿ",
+     "ಟೋಕನ್",
+     "ಅಪಾಯಿಂಟ್ಮೆಂಟ್"
+    ],
+    "ml": [
+     "ഒപി",
+     "ഒപിഡി",
+     "രജിസ്ട്രേഷൻ",
+     "ടോക്കൺ",
+     "ചീട്ട്",
+     "അപ്പോയിന്റ്മെന്റ്"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "general_medicine",
+   "type": "department",
+   "available": true,
+   "verified": false,
+   "floor": 1,
+   "place": "Main Block, left wing",
+   "map_node": "general_medicine",
+   "names": {
+    "en": "General Medicine",
+    "hi": "जनरल मेडिसिन",
+    "kn": "ಜನರಲ್ ಮೆಡಿಸಿನ್",
+    "ml": "ജനറൽ മെഡിസിൻ",
+    "tcy": "ಜನರಲ್ ಮೆಡಿಸಿನ್"
+   },
+   "keywords": {
+    "en": [
+     "general medicine",
+     "physician",
+     "general physician",
+     "fever",
+     "medicine opd",
+     "internal medicine"
+    ],
+    "hi": [
+     "जनरल मेडिसिन",
+     "फिजिशियन",
+     "बुखार",
+     "मेडिसिन ओपीडी"
+    ],
+    "kn": [
+     "ಜನರಲ್ ಮೆಡಿಸಿನ್",
+     "ಫಿಸಿಷಿಯನ್",
+     "ಜ್ವರ"
+    ],
+    "ml": [
+     "ജനറൽ മെഡിസിൻ",
+     "ഫിസിഷ്യൻ",
+     "പനി"
+    ],
+    "tcy": [
+     "ಜ್ವರೊ"
+    ]
+   },
+   "directions": {}
+  },
+  {
+   "id": "general_surgery",
+   "type": "department",
+   "available": true,
+   "verified": false,
+   "floor": 1,
+   "place": "Main Block, left wing",
+   "map_node": "general_surgery",
+   "names": {
+    "en": "General Surgery",
+    "hi": "जनरल सर्जरी",
+    "kn": "ಜನರಲ್ ಸರ್ಜರಿ",
+    "ml": "ജനറൽ സർജറി",
+    "tcy": "ಜನರಲ್ ಸರ್ಜರಿ"
+   },
+   "keywords": {
+    "en": [
+     "general surgery",
+     "surgeon",
+     "surgery opd",
+     "hernia",
+     "appendix",
+     "piles"
+    ],
+    "hi": [
+     "जनरल सर्जरी",
+     "सर्जन",
+     "सर्जरी",
+     "हर्निया",
+     "बवासीर"
+    ],
+    "kn": [
+     "ಜನರಲ್ ಸರ್ಜರಿ",
+     "ಸರ್ಜನ್",
+     "ಶಸ್ತ್ರಚಿಕಿತ್ಸೆ",
+     "ಹರ್ನಿಯಾ"
+    ],
+    "ml": [
+     "ജനറൽ സർജറി",
+     "സർജൻ",
+     "ശസ്ത്രക്രിയ",
+     "ഹെർണിയ"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "cardiology",
+   "type": "department",
+   "available": true,
+   "verified": false,
+   "floor": 2,
+   "place": "Main Block, left wing",
+   "map_node": "cardiology",
+   "names": {
+    "en": "Cardiology",
+    "hi": "हृदय रोग विभाग",
+    "kn": "ಹೃದ್ರೋಗ ವಿಭಾಗ",
+    "ml": "ഹൃദ്രോഗ വിഭാഗം",
+    "tcy": "ಕಾರ್ಡಿಯಾಲಜಿ"
+   },
+   "keywords": {
+    "en": [
+     "cardiology",
+     "cardiologist",
+     "heart",
+     "heart doctor",
+     "cardiac",
+     "chest pain",
+     "bp"
+    ],
+    "hi": [
+     "कार्डियोलॉजी",
+     "हृदय",
+     "दिल",
+     "हार्ट",
+     "सीने में दर्द"
+    ],
+    "kn": [
+     "ಕಾರ್ಡಿಯಾಲಜಿ",
+     "ಕಾರ್ಡಿಯೋಲಜಿ",
+     "ಹೃದಯ",
+     "ಹಾರ್ಟ್",
+     "ಎದೆ ನೋವು"
+    ],
+    "ml": [
+     "കാർഡിയോളജി",
+     "ഹൃദയ",
+     "ഹാർട്ട്",
+     "നെഞ്ചുവേദന"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "cardiac_surgery",
+   "type": "department",
+   "available": true,
+   "verified": false,
+   "floor": 2,
+   "place": "Main Block, left wing",
+   "map_node": "cardiac_surgery",
+   "names": {
+    "en": "Cardiac Surgery (CTVS)",
+    "hi": "हृदय शल्य चिकित्सा",
+    "kn": "ಹೃದಯ ಶಸ್ತ್ರಚಿಕಿತ್ಸೆ",
+    "ml": "ഹൃദയ ശസ്ത്രക്രിയ",
+    "tcy": "ಕಾರ್ಡಿಯಾಕ್ ಸರ್ಜರಿ"
+   },
+   "keywords": {
+    "en": [
+     "cardiac surgery",
+     "heart surgery",
+     "bypass",
+     "ctvs",
+     "cardiothoracic",
+     "valve surgery"
+    ],
+    "hi": [
+     "हार्ट सर्जरी",
+     "बाईपास",
+     "दिल का ऑपरेशन",
+     "कार्डियक सर्जरी"
+    ],
+    "kn": [
+     "ಹಾರ್ಟ್ ಸರ್ಜರಿ",
+     "ಬೈಪಾಸ್",
+     "ಹೃದಯ ಶಸ್ತ್ರಚಿಕಿತ್ಸೆ",
+     "ಕಾರ್ಡಿಯಾಕ್ ಸರ್ಜರಿ"
+    ],
+    "ml": [
+     "ഹാർട്ട് സർജറി",
+     "ബൈപാസ്",
+     "ബൈപ്പാസ്",
+     "കാർഡിയാക് സർജറി"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "cath_lab",
+   "type": "department",
+   "available": true,
+   "verified": false,
+   "floor": 2,
+   "place": "Main Block, left wing",
+   "map_node": "cath_lab",
+   "names": {
+    "en": "Cath Lab",
+    "hi": "कैथ लैब",
+    "kn": "ಕ್ಯಾತ್ ಲ್ಯಾಬ್",
+    "ml": "കാത്ത് ലാബ്",
+    "tcy": "ಕ್ಯಾತ್ ಲ್ಯಾಬ್"
+   },
+   "keywords": {
+    "en": [
+     "cath lab",
+     "cathlab",
+     "angiogram",
+     "angiography",
+     "angioplasty",
+     "stent"
+    ],
+    "hi": [
+     "कैथ लैब",
+     "एंजियोग्राफी",
+     "एंजियोप्लास्टी",
+     "स्टेंट"
+    ],
+    "kn": [
+     "ಕ್ಯಾತ್ ಲ್ಯಾಬ್",
+     "ಆಂಜಿಯೋಗ್ರಾಮ್",
+     "ಆಂಜಿಯೋಪ್ಲಾಸ್ಟಿ",
+     "ಸ್ಟೆಂಟ್"
+    ],
+    "ml": [
+     "കാത്ത് ലാബ്",
+     "ആൻജിയോഗ്രാം",
+     "ആൻജിയോപ്ലാസ്റ്റി",
+     "സ്റ്റെന്റ്"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "ecg_echo",
+   "type": "department",
+   "available": true,
+   "verified": false,
+   "floor": 2,
+   "place": "Main Block, left wing",
+   "map_node": "ecg_echo",
+   "names": {
+    "en": "ECG / Echo / TMT",
+    "hi": "ईसीजी / इको",
+    "kn": "ಇಸಿಜಿ / ಎಕೋ",
+    "ml": "ഇസിജി / എക്കോ",
+    "tcy": "ಇಸಿಜಿ"
+   },
+   "keywords": {
+    "en": [
+     "ecg",
+     "ekg",
+     "echo",
+     "echocardiogram",
+     "tmt",
+     "treadmill",
+     "holter"
+    ],
+    "hi": [
+     "ईसीजी",
+     "इको",
+     "टीएमटी",
+     "ट्रेडमिल"
+    ],
+    "kn": [
+     "ಇಸಿಜಿ",
+     "ಈಸಿಜಿ",
+     "ಎಕೋ",
+     "ಟಿಎಂಟಿ"
+    ],
+    "ml": [
+     "ഇസിജി",
+     "എക്കോ",
+     "ടിഎംടി"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "neurology",
+   "type": "department",
+   "available": true,
+   "verified": false,
+   "floor": 3,
+   "place": "Main Block, left wing",
+   "map_node": "neurology",
+   "names": {
+    "en": "Neurology",
+    "hi": "न्यूरोलॉजी",
+    "kn": "ನರರೋಗ ವಿಭಾಗ",
+    "ml": "ന്യൂറോളജി",
+    "tcy": "ನ್ಯೂರಾಲಜಿ"
+   },
+   "keywords": {
+    "en": [
+     "neurology",
+     "neurologist",
+     "nerve",
+     "brain doctor",
+     "stroke",
+     "paralysis",
+     "fits",
+     "epilepsy",
+     "headache"
+    ],
+    "hi": [
+     "न्यूरोलॉजी",
+     "न्यूरो",
+     "लकवा",
+     "मिर्गी",
+     "दौरा",
+     "सिरदर्द"
+    ],
+    "kn": [
+     "ನ್ಯೂರಾಲಜಿ",
+     "ನ್ಯೂರೋ",
+     "ನರ",
+     "ಪಾರ್ಶ್ವವಾಯು",
+     "ಮೂರ್ಛೆ",
+     "ತಲೆನೋವು"
+    ],
+    "ml": [
+     "ന്യൂറോളജി",
+     "ന്യൂറോ",
+     "ഞരമ്പ്",
+     "പക്ഷാഘാത",
+     "അപസ്മാര",
+     "തലവേദന"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "neurosurgery",
+   "type": "department",
+   "available": true,
+   "verified": false,
+   "floor": 3,
+   "place": "Main Block, left wing",
+   "map_node": "neurosurgery",
+   "names": {
+    "en": "Neurosurgery",
+    "hi": "न्यूरो सर्जरी",
+    "kn": "ನರ ಶಸ್ತ್ರಚಿಕಿತ್ಸೆ",
+    "ml": "ന്യൂറോ സർജറി",
+    "tcy": "ನ್ಯೂರೋ ಸರ್ಜರಿ"
+   },
+   "keywords": {
+    "en": [
+     "neurosurgery",
+     "neurosurgeon",
+     "brain surgery",
+     "spine surgery",
+     "head injury"
+    ],
+    "hi": [
+     "न्यूरो सर्जरी",
+     "न्यूरोसर्जरी",
+     "दिमाग का ऑपरेशन",
+     "रीढ़ की सर्जरी"
+    ],
+    "kn": [
+     "ನ್ಯೂರೋ ಸರ್ಜರಿ",
+     "ನ್ಯೂರೋಸರ್ಜರಿ",
+     "ಮೆದುಳಿನ ಶಸ್ತ್ರಚಿಕಿತ್ಸೆ"
+    ],
+    "ml": [
+     "ന്യൂറോ സർജറി",
+     "ന്യൂറോസർജറി"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "orthopedics",
+   "type": "department",
+   "available": true,
+   "verified": false,
+   "floor": 1,
+   "place": "Main Block, left wing",
+   "map_node": "orthopedics",
+   "names": {
+    "en": "Orthopaedics",
+    "hi": "हड्डी रोग विभाग",
+    "kn": "ಮೂಳೆ ಚಿಕಿತ್ಸಾ ವಿಭಾಗ",
+    "ml": "ഓർത്തോപീഡിക്സ്",
+    "tcy": "ಆರ್ಥೋಪೆಡಿಕ್ಸ್"
+   },
+   "keywords": {
+    "en": [
+     "orthopedics",
+     "orthopaedics",
+     "ortho",
+     "bone",
+     "fracture",
+     "joint",
+     "knee",
+     "back pain",
+     "bone doctor"
+    ],
+    "hi": [
+     "ऑर्थो",
+     "ऑर्थोपेडिक",
+     "हड्डी",
+     "फ्रैक्चर",
+     "जोड़ों",
+     "घुटना",
+     "कमर दर्द"
+    ],
+    "kn": [
+     "ಆರ್ಥೋ",
+     "ಆರ್ಥೋಪೆಡಿಕ್",
+     "ಮೂಳೆ",
+     "ಫ್ರಾಕ್ಚರ್",
+     "ಮಂಡಿ",
+     "ಸೊಂಟ ನೋವು"
+    ],
+    "ml": [
+     "ഓർത്തോ",
+     "ഓർത്തോപീഡിക്",
+     "എല്ല്",
+     "ഫ്രാക്ചർ",
+     "മുട്ട്",
+     "നടുവേദന"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "pediatrics",
+   "type": "department",
+   "available": true,
+   "verified": false,
+   "floor": 1,
+   "place": "Main Block, left wing",
+   "map_node": "pediatrics",
+   "names": {
+    "en": "Paediatrics",
+    "hi": "बाल रोग विभाग",
+    "kn": "ಮಕ್ಕಳ ವಿಭಾಗ",
+    "ml": "ശിശുരോഗ വിഭാഗം",
+    "tcy": "ಪೀಡಿಯಾಟ್ರಿಕ್ಸ್"
+   },
+   "keywords": {
+    "en": [
+     "pediatrics",
+     "paediatrics",
+     "pediatrician",
+     "child",
+     "children",
+     "kids",
+     "baby doctor",
+     "child doctor"
+    ],
+    "hi": [
+     "बाल रोग",
+     "पीडियाट्रिक",
+     "बच्चों",
+     "बच्चे",
+     "शिशु"
+    ],
+    "kn": [
+     "ಮಕ್ಕಳ",
+     "ಪೀಡಿಯಾಟ್ರಿಕ್",
+     "ಮಗು",
+     "ಮಕ್ಕಳ ಡಾಕ್ಟರ್"
+    ],
+    "ml": [
+     "ശിശുരോഗ",
+     "പീഡിയാട്രിക്",
+     "കുട്ടികളുടെ",
+     "കുഞ്ഞ്"
+    ],
+    "tcy": [
+     "ಜೋಕುಲೆ"
+    ]
+   },
+   "directions": {}
+  },
+  {
+   "id": "nicu_picu",
+   "type": "department",
+   "available": true,
+   "verified": false,
+   "floor": 3,
+   "place": "Main Block, left wing",
+   "map_node": "nicu_picu",
+   "names": {
+    "en": "NICU / PICU",
+    "hi": "एनआईसीयू",
+    "kn": "ಎನ್ಐಸಿಯು",
+    "ml": "എൻഐസിയു",
+    "tcy": "ಎನ್ಐಸಿಯು"
+   },
+   "keywords": {
+    "en": [
+     "nicu",
+     "picu",
+     "newborn icu",
+     "baby icu",
+     "neonatal"
+    ],
+    "hi": [
+     "एनआईसीयू",
+     "पीआईसीयू",
+     "नवजात"
+    ],
+    "kn": [
+     "ಎನ್ಐಸಿಯು",
+     "ಪಿಐಸಿಯು",
+     "ನವಜಾತ"
+    ],
+    "ml": [
+     "എൻഐസിയു",
+     "പിഐസിയു",
+     "നവജാത"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "obstetrics_gynecology",
+   "type": "department",
+   "available": true,
+   "verified": false,
+   "floor": 2,
+   "place": "Main Block, left wing",
+   "map_node": "obstetrics_gynecology",
+   "names": {
+    "en": "Obstetrics & Gynaecology",
+    "hi": "स्त्री एवं प्रसूति रोग विभाग",
+    "kn": "ಸ್ತ್ರೀರೋಗ ಮತ್ತು ಪ್ರಸೂತಿ ವಿಭಾಗ",
+    "ml": "സ്ത്രീരോഗ - പ്രസവ വിഭാഗം",
+    "tcy": "ಗೈನಕಾಲಜಿ"
+   },
+   "keywords": {
+    "en": [
+     "gynecology",
+     "gynaecology",
+     "gynec",
+     "gynaec",
+     "gynecologist",
+     "obstetrics",
+     "pregnancy",
+     "pregnant",
+     "maternity",
+     "women",
+     "obg",
+     "antenatal"
+    ],
+    "hi": [
+     "गायनी",
+     "गायनेकोलॉजी",
+     "स्त्री रोग",
+     "प्रसूति",
+     "गर्भवती",
+     "प्रेगनेंसी",
+     "महिला"
+    ],
+    "kn": [
+     "ಗೈನಕಾಲಜಿ",
+     "ಗೈನಿಕ್",
+     "ಸ್ತ್ರೀರೋಗ",
+     "ಪ್ರಸೂತಿ",
+     "ಗರ್ಭಿಣಿ",
+     "ಪ್ರೆಗ್ನೆನ್ಸಿ"
+    ],
+    "ml": [
+     "ഗൈനക്കോളജി",
+     "ഗൈനക്",
+     "സ്ത്രീരോഗ",
+     "പ്രസവ",
+     "ഗർഭിണി",
+     "പ്രെഗ്നൻസി"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "labour_room",
+   "type": "department",
+   "available": true,
+   "verified": false,
+   "floor": 2,
+   "place": "Main Block, left wing",
+   "map_node": "labour_room",
+   "names": {
+    "en": "Labour Room",
+    "hi": "लेबर रूम",
+    "kn": "ಹೆರಿಗೆ ಕೊಠಡಿ",
+    "ml": "ലേബർ റൂം",
+    "tcy": "ಲೇಬರ್ ರೂಮ್"
+   },
+   "keywords": {
+    "en": [
+     "labour room",
+     "labor room",
+     "delivery room",
+     "delivery",
+     "labour ward"
+    ],
+    "hi": [
+     "लेबर रूम",
+     "डिलीवरी",
+     "प्रसव कक्ष"
+    ],
+    "kn": [
+     "ಲೇಬರ್ ರೂಮ್",
+     "ಡೆಲಿವರಿ",
+     "ಹೆರಿಗೆ"
+    ],
+    "ml": [
+     "ലേബർ റൂം",
+     "ഡെലിവറി",
+     "പ്രസവമുറി"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "ivf_fertility",
+   "type": "department",
+   "available": true,
+   "verified": false,
+   "floor": 2,
+   "place": "Main Block, right wing",
+   "map_node": "ivf_fertility",
+   "names": {
+    "en": "IVF & Fertility",
+    "hi": "आईवीएफ / फर्टिलिटी",
+    "kn": "ಐವಿಎಫ್ / ಫರ್ಟಿಲಿಟಿ",
+    "ml": "ഐവിഎഫ് / ഫെർട്ടിലിറ്റി",
+    "tcy": "ಐವಿಎಫ್"
+   },
+   "keywords": {
+    "en": [
+     "ivf",
+     "fertility",
+     "infertility",
+     "test tube baby",
+     "iui"
+    ],
+    "hi": [
+     "आईवीएफ",
+     "फर्टिलिटी",
+     "बांझपन",
+     "टेस्ट ट्यूब बेबी"
+    ],
+    "kn": [
+     "ಐವಿಎಫ್",
+     "ಫರ್ಟಿಲಿಟಿ",
+     "ಬಂಜೆತನ"
+    ],
+    "ml": [
+     "ഐവിഎഫ്",
+     "ഫെർട്ടിലിറ്റി",
+     "വന്ധ്യത"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "dermatology",
+   "type": "department",
+   "available": true,
+   "verified": false,
+   "floor": 1,
+   "place": "Main Block, left wing",
+   "map_node": "dermatology",
+   "names": {
+    "en": "Dermatology",
+    "hi": "त्वचा रोग विभाग",
+    "kn": "ಚರ್ಮರೋಗ ವಿಭಾಗ",
+    "ml": "ത്വക്‌രോഗ വിഭാഗം",
+    "tcy": "ಡರ್ಮಟಾಲಜಿ"
+   },
+   "keywords": {
+    "en": [
+     "dermatology",
+     "dermatologist",
+     "skin",
+     "skin doctor",
+     "hair fall",
+     "allergy",
+     "rash",
+     "cosmetology"
+    ],
+    "hi": [
+     "डर्मेटोलॉजी",
+     "त्वचा",
+     "स्किन",
+     "चर्म रोग",
+     "बाल झड़ना",
+     "एलर्जी"
+    ],
+    "kn": [
+     "ಡರ್ಮಟಾಲಜಿ",
+     "ಚರ್ಮ",
+     "ಸ್ಕಿನ್",
+     "ಅಲರ್ಜಿ",
+     "ಕೂದಲು ಉದುರುವಿಕೆ"
+    ],
+    "ml": [
+     "ഡെർമറ്റോളജി",
+     "ത്വക്ക്",
+     "സ്കിൻ",
+     "അലർജി",
+     "ചർമ്മ"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "ent",
+   "type": "department",
+   "available": true,
+   "verified": false,
+   "floor": 1,
+   "place": "Main Block, left wing",
+   "map_node": "ent",
+   "names": {
+    "en": "ENT",
+    "hi": "नाक कान गला विभाग",
+    "kn": "ಕಿವಿ ಮೂಗು ಗಂಟಲು ವಿಭಾಗ",
+    "ml": "ഇഎൻടി",
+    "tcy": "ಇಎನ್‌ಟಿ"
+   },
+   "keywords": {
+    "en": [
+     "ent",
+     "ear",
+     "nose",
+     "throat",
+     "ear nose throat",
+     "hearing",
+     "sinus",
+     "tonsil"
+    ],
+    "hi": [
+     "ईएनटी",
+     "कान",
+     "नाक",
+     "गला",
+     "सुनाई"
+    ],
+    "kn": [
+     "ಇಎನ್‌ಟಿ",
+     "ಇಎನ್ಟಿ",
+     "ಕಿವಿ",
+     "ಮೂಗು",
+     "ಗಂಟಲು"
+    ],
+    "ml": [
+     "ഇഎൻടി",
+     "ചെവി",
+     "മൂക്ക്",
+     "തൊണ്ട"
+    ],
+    "tcy": [
+     "ಕೆಬಿ",
+     "ಮೂಂಕು"
+    ]
+   },
+   "directions": {}
+  },
+  {
+   "id": "ophthalmology",
+   "type": "department",
+   "available": true,
+   "verified": false,
+   "floor": 1,
+   "place": "Main Block, left wing",
+   "map_node": "ophthalmology",
+   "names": {
+    "en": "Ophthalmology (Eye)",
+    "hi": "नेत्र रोग विभाग",
+    "kn": "ಕಣ್ಣಿನ ವಿಭಾಗ",
+    "ml": "നേത്രരോഗ വിഭാഗം",
+    "tcy": "ಕಣ್ಣ್‌ದ ವಿಭಾಗ"
+   },
+   "keywords": {
+    "en": [
+     "ophthalmology",
+     "eye",
+     "eyes",
+     "eye doctor",
+     "eye hospital",
+     "cataract",
+     "vision",
+     "spectacles",
+     "glasses"
+    ],
+    "hi": [
+     "आंख",
+     "आँख",
+     "नेत्र",
+     "मोतियाबिंद",
+     "चश्मा",
+     "आई"
+    ],
+    "kn": [
+     "ಕಣ್ಣು",
+     "ಕಣ್ಣಿನ",
+     "ನೇತ್ರ",
+     "ಕ್ಯಾಟರಾಕ್ಟ್",
+     "ಕನ್ನಡಕ",
+     "ಐ ಡಾಕ್ಟರ್"
+    ],
+    "ml": [
+     "കണ്ണ്",
+     "കണ്ണിന്റെ",
+     "നേത്ര",
+     "തിമിര",
+     "കണ്ണട"
+    ],
+    "tcy": [
+     "ಕಣ್ಣ್"
+    ]
+   },
+   "directions": {}
+  },
+  {
+   "id": "dental",
+   "type": "department",
+   "available": true,
+   "verified": false,
+   "floor": 1,
+   "place": "Main Block, left wing",
+   "map_node": "dental",
+   "names": {
+    "en": "Dental",
+    "hi": "दंत रोग विभाग",
+    "kn": "ದಂತ ವಿಭಾಗ",
+    "ml": "ദന്തരോഗ വിഭാഗം",
+    "tcy": "ಡೆಂಟಲ್"
+   },
+   "keywords": {
+    "en": [
+     "dental",
+     "dentist",
+     "tooth",
+     "teeth",
+     "toothache",
+     "root canal",
+     "braces"
+    ],
+    "hi": [
+     "डेंटल",
+     "दांत",
+     "दाँत",
+     "डेंटिस्ट",
+     "रूट कैनाल"
+    ],
+    "kn": [
+     "ಡೆಂಟಲ್",
+     "ಹಲ್ಲು",
+     "ದಂತ",
+     "ಡೆಂಟಿಸ್ಟ್",
+     "ರೂಟ್ ಕೆನಾಲ್"
+    ],
+    "ml": [
+     "ഡെന്റൽ",
+     "പല്ല്",
+     "ദന്ത",
+     "ഡെന്റിസ്റ്റ്",
+     "റൂട്ട് കനാൽ"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "psychiatry",
+   "type": "department",
+   "available": true,
+   "verified": false,
+   "floor": 3,
+   "place": "Main Block, left wing",
+   "map_node": "psychiatry",
+   "names": {
+    "en": "Psychiatry",
+    "hi": "मनोरोग विभाग",
+    "kn": "ಮನೋರೋಗ ವಿಭಾಗ",
+    "ml": "മനോരോഗ വിഭാഗം",
+    "tcy": "ಸೈಕಿಯಾಟ್ರಿ"
+   },
+   "keywords": {
+    "en": [
+     "psychiatry",
+     "psychiatrist",
+     "mental health",
+     "psychology",
+     "psychologist",
+     "counselling",
+     "counseling",
+     "depression",
+     "de-addiction"
+    ],
+    "hi": [
+     "साइकियाट्री",
+     "मनोरोग",
+     "मानसिक",
+     "काउंसलिंग",
+     "डिप्रेशन",
+     "नशा मुक्ति"
+    ],
+    "kn": [
+     "ಸೈಕಿಯಾಟ್ರಿ",
+     "ಮನೋರೋಗ",
+     "ಮಾನಸಿಕ",
+     "ಕೌನ್ಸೆಲಿಂಗ್",
+     "ಖಿನ್ನತೆ"
+    ],
+    "ml": [
+     "സൈക്യാട്രി",
+     "മനോരോഗ",
+     "മാനസിക",
+     "കൗൺസലിംഗ്",
+     "വിഷാദ"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "nephrology",
+   "type": "department",
+   "available": true,
+   "verified": false,
+   "floor": 3,
+   "place": "Main Block, left wing",
+   "map_node": "nephrology",
+   "names": {
+    "en": "Nephrology",
+    "hi": "नेफ्रोलॉजी",
+    "kn": "ಮೂತ್ರಪಿಂಡ ವಿಭಾಗ",
+    "ml": "നെഫ്രോളജി",
+    "tcy": "ನೆಫ್ರಾಲಜಿ"
+   },
+   "keywords": {
+    "en": [
+     "nephrology",
+     "nephrologist",
+     "kidney",
+     "kidney doctor",
+     "renal"
+    ],
+    "hi": [
+     "नेफ्रोलॉजी",
+     "किडनी",
+     "गुर्दा",
+     "गुर्दे"
+    ],
+    "kn": [
+     "ನೆಫ್ರಾಲಜಿ",
+     "ಕಿಡ್ನಿ",
+     "ಮೂತ್ರಪಿಂಡ"
+    ],
+    "ml": [
+     "നെഫ്രോളജി",
+     "കിഡ്നി",
+     "വൃക്ക"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "dialysis",
+   "type": "department",
+   "available": true,
+   "verified": false,
+   "floor": 3,
+   "place": "Main Block, left wing",
+   "map_node": "dialysis",
+   "names": {
+    "en": "Dialysis Unit",
+    "hi": "डायलिसिस",
+    "kn": "ಡಯಾಲಿಸಿಸ್",
+    "ml": "ഡയാലിസിസ്",
+    "tcy": "ಡಯಾಲಿಸಿಸ್"
+   },
+   "keywords": {
+    "en": [
+     "dialysis",
+     "haemodialysis",
+     "hemodialysis"
+    ],
+    "hi": [
+     "डायलिसिस"
+    ],
+    "kn": [
+     "ಡಯಾಲಿಸಿಸ್",
+     "ಡಯಾಲಿಸಿಸ್‌"
+    ],
+    "ml": [
+     "ഡയാലിസിസ്"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "urology",
+   "type": "department",
+   "available": true,
+   "verified": false,
+   "floor": 3,
+   "place": "Main Block, left wing",
+   "map_node": "urology",
+   "names": {
+    "en": "Urology",
+    "hi": "यूरोलॉजी",
+    "kn": "ಮೂತ್ರಶಾಸ್ತ್ರ ವಿಭಾಗ",
+    "ml": "യൂറോളജി",
+    "tcy": "ಯೂರಾಲಜಿ"
+   },
+   "keywords": {
+    "en": [
+     "urology",
+     "urologist",
+     "urine problem",
+     "kidney stone",
+     "stone",
+     "prostate",
+     "bladder"
+    ],
+    "hi": [
+     "यूरोलॉजी",
+     "पेशाब",
+     "पथरी",
+     "प्रोस्टेट",
+     "मूत्र"
+    ],
+    "kn": [
+     "ಯೂರಾಲಜಿ",
+     "ಯುರಾಲಜಿ",
+     "ಮೂತ್ರ",
+     "ಕಿಡ್ನಿ ಸ್ಟೋನ್",
+     "ಪ್ರಾಸ್ಟೇಟ್"
+    ],
+    "ml": [
+     "യൂറോളജി",
+     "മൂത്ര",
+     "കിഡ്നി സ്റ്റോൺ",
+     "കല്ല്",
+     "പ്രോസ്റ്റേറ്റ്"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "gastroenterology",
+   "type": "department",
+   "available": true,
+   "verified": false,
+   "floor": 3,
+   "place": "Main Block, right wing",
+   "map_node": "gastroenterology",
+   "names": {
+    "en": "Gastroenterology",
+    "hi": "गैस्ट्रोएंटेरोलॉजी",
+    "kn": "ಜಠರ ಮತ್ತು ಯಕೃತ್ ವಿಭಾಗ",
+    "ml": "ഗ്യാസ്ട്രോഎന്ററോളജി",
+    "tcy": "ಗ್ಯಾಸ್ಟ್ರೋಎಂಟರಾಲಜಿ"
+   },
+   "keywords": {
+    "en": [
+     "gastroenterology",
+     "gastro",
+     "gastroenterologist",
+     "stomach",
+     "liver",
+     "digestion",
+     "acidity",
+     "jaundice",
+     "hepatology"
+    ],
+    "hi": [
+     "गैस्ट्रो",
+     "पेट",
+     "लिवर",
+     "जिगर",
+     "पीलिया",
+     "एसिडिटी"
+    ],
+    "kn": [
+     "ಗ್ಯಾಸ್ಟ್ರೋ",
+     "ಹೊಟ್ಟೆ",
+     "ಲಿವರ್",
+     "ಯಕೃತ್",
+     "ಕಾಮಾಲೆ",
+     "ಅಸಿಡಿಟಿ"
+    ],
+    "ml": [
+     "ഗ്യാസ്ട്രോ",
+     "വയറ്",
+     "ലിവർ",
+     "കരൾ",
+     "മഞ്ഞപ്പിത്ത",
+     "അസിഡിറ്റി"
+    ],
+    "tcy": [
+     "ಬಂಜಿ"
+    ]
+   },
+   "directions": {}
+  },
+  {
+   "id": "endoscopy",
+   "type": "department",
+   "available": true,
+   "verified": false,
+   "floor": 3,
+   "place": "Main Block, right wing",
+   "map_node": "endoscopy",
+   "names": {
+    "en": "Endoscopy",
+    "hi": "एंडोस्कोपी",
+    "kn": "ಎಂಡೋಸ್ಕೋಪಿ",
+    "ml": "എൻഡോസ്കോപ്പി",
+    "tcy": "ಎಂಡೋಸ್ಕೋಪಿ"
+   },
+   "keywords": {
+    "en": [
+     "endoscopy",
+     "colonoscopy",
+     "scopy"
+    ],
+    "hi": [
+     "एंडोस्कोपी",
+     "कोलोनोस्कोपी"
+    ],
+    "kn": [
+     "ಎಂಡೋಸ್ಕೋಪಿ",
+     "ಕೊಲೊನೋಸ್ಕೋಪಿ"
+    ],
+    "ml": [
+     "എൻഡോസ്കോപ്പി",
+     "കൊളോണോസ്കോപ്പി"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "pulmonology",
+   "type": "department",
+   "available": true,
+   "verified": false,
+   "floor": 3,
+   "place": "Main Block, right wing",
+   "map_node": "pulmonology",
+   "names": {
+    "en": "Pulmonology",
+    "hi": "फेफड़ा रोग विभाग",
+    "kn": "ಶ್ವಾಸಕೋಶ ವಿಭಾಗ",
+    "ml": "ശ്വാസകോശ വിഭാഗം",
+    "tcy": "ಪಲ್ಮನಾಲಜಿ"
+   },
+   "keywords": {
+    "en": [
+     "pulmonology",
+     "pulmonologist",
+     "lungs",
+     "lung",
+     "chest doctor",
+     "breathing",
+     "asthma",
+     "tb",
+     "tuberculosis",
+     "cough"
+    ],
+    "hi": [
+     "पल्मोनोलॉजी",
+     "फेफड़े",
+     "फेफड़ा",
+     "सांस",
+     "अस्थमा",
+     "दमा",
+     "टीबी",
+     "खांसी"
+    ],
+    "kn": [
+     "ಪಲ್ಮನಾಲಜಿ",
+     "ಶ್ವಾಸಕೋಶ",
+     "ಉಸಿರಾಟ",
+     "ಅಸ್ತಮಾ",
+     "ಟಿಬಿ",
+     "ಕೆಮ್ಮು"
+    ],
+    "ml": [
+     "പൾമണോളജി",
+     "ശ്വാസകോശ",
+     "ശ്വാസം",
+     "ആസ്ത്മ",
+     "ടിബി",
+     "ചുമ"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "oncology",
+   "type": "department",
+   "available": true,
+   "verified": false,
+   "floor": 4,
+   "place": "Main Block, left wing",
+   "map_node": "oncology",
+   "names": {
+    "en": "Oncology (Cancer Care)",
+    "hi": "कैंसर विभाग",
+    "kn": "ಕ್ಯಾನ್ಸರ್ ವಿಭಾಗ",
+    "ml": "കാൻസർ വിഭാഗം",
+    "tcy": "ಕ್ಯಾನ್ಸರ್ ವಿಭಾಗ"
+   },
+   "keywords": {
+    "en": [
+     "oncology",
+     "oncologist",
+     "cancer",
+     "chemotherapy",
+     "chemo",
+     "radiation",
+     "radiotherapy",
+     "tumour",
+     "tumor"
+    ],
+    "hi": [
+     "ऑन्कोलॉजी",
+     "कैंसर",
+     "कीमोथेरेपी",
+     "कीमो",
+     "रेडिएशन",
+     "ट्यूमर"
+    ],
+    "kn": [
+     "ಆಂಕಾಲಜಿ",
+     "ಕ್ಯಾನ್ಸರ್",
+     "ಕೀಮೋ",
+     "ರೇಡಿಯೇಷನ್",
+     "ಗಡ್ಡೆ"
+    ],
+    "ml": [
+     "ഓങ്കോളജി",
+     "കാൻസർ",
+     "ക്യാൻസർ",
+     "കീമോ",
+     "റേഡിയേഷൻ",
+     "അർബുദ"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "hematology",
+   "type": "department",
+   "available": true,
+   "verified": false,
+   "floor": 4,
+   "place": "Main Block, left wing",
+   "map_node": "hematology",
+   "names": {
+    "en": "Haematology",
+    "hi": "हेमेटोलॉजी",
+    "kn": "ಹೆಮಟಾಲಜಿ",
+    "ml": "ഹെമറ്റോളജി",
+    "tcy": "ಹೆಮಟಾಲಜಿ"
+   },
+   "keywords": {
+    "en": [
+     "hematology",
+     "haematology",
+     "hematologist",
+     "blood disorder",
+     "anemia",
+     "anaemia",
+     "thalassemia"
+    ],
+    "hi": [
+     "हेमेटोलॉजी",
+     "खून की कमी",
+     "एनीमिया",
+     "थैलेसीमिया"
+    ],
+    "kn": [
+     "ಹೆಮಟಾಲಜಿ",
+     "ರಕ್ತಹೀನತೆ",
+     "ಅನೀಮಿಯಾ"
+    ],
+    "ml": [
+     "ഹെമറ്റോളജി",
+     "വിളർച്ച",
+     "അനീമിയ"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "endocrinology",
+   "type": "department",
+   "available": true,
+   "verified": false,
+   "floor": 3,
+   "place": "Main Block, right wing",
+   "map_node": "endocrinology",
+   "names": {
+    "en": "Endocrinology & Diabetes",
+    "hi": "मधुमेह एवं एंडोक्राइनोलॉजी",
+    "kn": "ಮಧುಮೇಹ ವಿಭಾಗ",
+    "ml": "പ്രമേഹ വിഭാഗം",
+    "tcy": "ಡಯಾಬಿಟೀಸ್ ವಿಭಾಗ"
+   },
+   "keywords": {
+    "en": [
+     "endocrinology",
+     "endocrinologist",
+     "diabetes",
+     "diabetic",
+     "sugar",
+     "thyroid",
+     "hormone"
+    ],
+    "hi": [
+     "एंडोक्राइनोलॉजी",
+     "डायबिटीज",
+     "शुगर",
+     "मधुमेह",
+     "थायराइड"
+    ],
+    "kn": [
+     "ಎಂಡೋಕ್ರೈನಾಲಜಿ",
+     "ಡಯಾಬಿಟೀಸ್",
+     "ಶುಗರ್",
+     "ಸಕ್ಕರೆ ಕಾಯಿಲೆ",
+     "ಮಧುಮೇಹ",
+     "ಥೈರಾಯ್ಡ್"
+    ],
+    "ml": [
+     "എൻഡോക്രൈനോളജി",
+     "ഡയബറ്റിസ്",
+     "ഷുഗർ",
+     "പ്രമേഹ",
+     "തൈറോയ്ഡ്"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "rheumatology",
+   "type": "department",
+   "available": true,
+   "verified": false,
+   "floor": 3,
+   "place": "Main Block, right wing",
+   "map_node": "rheumatology",
+   "names": {
+    "en": "Rheumatology",
+    "hi": "रूमेटोलॉजी",
+    "kn": "ರುಮಟಾಲಜಿ",
+    "ml": "റുമറ്റോളജി",
+    "tcy": "ರುಮಟಾಲಜಿ"
+   },
+   "keywords": {
+    "en": [
+     "rheumatology",
+     "rheumatologist",
+     "arthritis",
+     "joint pain",
+     "gout"
+    ],
+    "hi": [
+     "रूमेटोलॉजी",
+     "गठिया",
+     "जोड़ों का दर्द",
+     "आर्थराइटिस"
+    ],
+    "kn": [
+     "ರುಮಟಾಲಜಿ",
+     "ಸಂಧಿವಾತ",
+     "ಕೀಲು ನೋವು",
+     "ಆರ್ಥ್ರೈಟಿಸ್"
+    ],
+    "ml": [
+     "റുമറ്റോളജി",
+     "വാതം",
+     "സന്ധിവേദന",
+     "ആർത്രൈറ്റിസ്"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "geriatrics",
+   "type": "department",
+   "available": true,
+   "verified": false,
+   "floor": 1,
+   "place": "Main Block, right wing",
+   "map_node": "geriatrics",
+   "names": {
+    "en": "Geriatrics",
+    "hi": "वृद्धावस्था विभाग",
+    "kn": "ವೃದ್ಧರ ವಿಭಾಗ",
+    "ml": "വയോജന വിഭാഗം",
+    "tcy": "ಜೆರಿಯಾಟ್ರಿಕ್ಸ್"
+   },
+   "keywords": {
+    "en": [
+     "geriatrics",
+     "geriatric",
+     "elderly",
+     "old age",
+     "senior citizen"
+    ],
+    "hi": [
+     "जेरियाट्रिक",
+     "बुजुर्ग",
+     "वृद्ध",
+     "सीनियर सिटीजन"
+    ],
+    "kn": [
+     "ಜೆರಿಯಾಟ್ರಿಕ್",
+     "ವೃದ್ಧರ",
+     "ಹಿರಿಯ ನಾಗರಿಕ"
+    ],
+    "ml": [
+     "ജെറിയാട്രിക്",
+     "വയോജന",
+     "മുതിർന്ന പൗര"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "fever_clinic",
+   "type": "department",
+   "available": true,
+   "verified": false,
+   "floor": 0,
+   "place": "Main Block, right wing",
+   "map_node": "fever_clinic",
+   "names": {
+    "en": "Fever & Infectious Diseases Clinic",
+    "hi": "बुखार क्लिनिक",
+    "kn": "ಜ್ವರ ಚಿಕಿತ್ಸಾಲಯ",
+    "ml": "പനി ക്ലിനിക്",
+    "tcy": "ಫೀವರ್ ಕ್ಲಿನಿಕ್"
+   },
+   "keywords": {
+    "en": [
+     "fever clinic",
+     "infectious disease",
+     "dengue",
+     "malaria",
+     "covid",
+     "isolation"
+    ],
+    "hi": [
+     "फीवर क्लिनिक",
+     "डेंगू",
+     "मलेरिया",
+     "कोविड",
+     "संक्रामक"
+    ],
+    "kn": [
+     "ಫೀವರ್ ಕ್ಲಿನಿಕ್",
+     "ಡೆಂಗ್ಯೂ",
+     "ಮಲೇರಿಯಾ",
+     "ಕೋವಿಡ್",
+     "ಸೋಂಕು"
+    ],
+    "ml": [
+     "ഫീവർ ക്ലിനിക്",
+     "ഡെങ്കി",
+     "മലേറിയ",
+     "കോവിഡ്",
+     "പകർച്ചവ്യാധി"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "plastic_surgery",
+   "type": "department",
+   "available": true,
+   "verified": false,
+   "floor": 4,
+   "place": "Main Block, left wing",
+   "map_node": "plastic_surgery",
+   "names": {
+    "en": "Plastic Surgery",
+    "hi": "प्लास्टिक सर्जरी",
+    "kn": "ಪ್ಲಾಸ್ಟಿಕ್ ಸರ್ಜರಿ",
+    "ml": "പ്ലാസ്റ്റിക് സർജറി",
+    "tcy": "ಪ್ಲಾಸ್ಟಿಕ್ ಸರ್ಜರಿ"
+   },
+   "keywords": {
+    "en": [
+     "plastic surgery",
+     "plastic surgeon",
+     "burns",
+     "burn",
+     "cosmetic surgery"
+    ],
+    "hi": [
+     "प्लास्टिक सर्जरी",
+     "जलना",
+     "बर्न"
+    ],
+    "kn": [
+     "ಪ್ಲಾಸ್ಟಿಕ್ ಸರ್ಜರಿ",
+     "ಸುಟ್ಟ ಗಾಯ",
+     "ಬರ್ನ್"
+    ],
+    "ml": [
+     "പ്ലാസ്റ്റിക് സർജറി",
+     "പൊള്ളൽ",
+     "ബേൺ"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "vascular_surgery",
+   "type": "department",
+   "available": true,
+   "verified": false,
+   "floor": 4,
+   "place": "Main Block, left wing",
+   "map_node": "vascular_surgery",
+   "names": {
+    "en": "Vascular Surgery",
+    "hi": "वैस्कुलर सर्जरी",
+    "kn": "ವ್ಯಾಸ್ಕುಲರ್ ಸರ್ಜರಿ",
+    "ml": "വാസ്കുലർ സർജറി",
+    "tcy": "ವ್ಯಾಸ್ಕುಲರ್ ಸರ್ಜರಿ"
+   },
+   "keywords": {
+    "en": [
+     "vascular",
+     "vascular surgery",
+     "varicose veins",
+     "varicose",
+     "veins"
+    ],
+    "hi": [
+     "वैस्कुलर",
+     "वैरिकोज",
+     "नसें"
+    ],
+    "kn": [
+     "ವ್ಯಾಸ್ಕುಲರ್",
+     "ವೆರಿಕೋಸ್",
+     "ರಕ್ತನಾಳ"
+    ],
+    "ml": [
+     "വാസ്കുലർ",
+     "വെരിക്കോസ്",
+     "രക്തക്കുഴൽ"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "pain_clinic",
+   "type": "department",
+   "available": true,
+   "verified": false,
+   "floor": 4,
+   "place": "Main Block, left wing",
+   "map_node": "pain_clinic",
+   "names": {
+    "en": "Pain Clinic & Anaesthesia",
+    "hi": "पेन क्लिनिक",
+    "kn": "ನೋವು ಚಿಕಿತ್ಸಾಲಯ",
+    "ml": "പെയിൻ ക്ലിനിക്",
+    "tcy": "ಪೇನ್ ಕ್ಲಿನಿಕ್"
+   },
+   "keywords": {
+    "en": [
+     "pain clinic",
+     "anaesthesia",
+     "anesthesia",
+     "anesthesiologist",
+     "pre anaesthesia check"
+    ],
+    "hi": [
+     "पेन क्लिनिक",
+     "एनेस्थीसिया",
+     "बेहोशी"
+    ],
+    "kn": [
+     "ಪೇನ್ ಕ್ಲಿನಿಕ್",
+     "ಅನಸ್ತೇಶಿಯಾ",
+     "ಅರಿವಳಿಕೆ"
+    ],
+    "ml": [
+     "പെയിൻ ക്ലിനിക്",
+     "അനസ്തേഷ്യ"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "physiotherapy",
+   "type": "department",
+   "available": true,
+   "verified": false,
+   "floor": 0,
+   "place": "Main Block, right wing",
+   "map_node": "physiotherapy",
+   "names": {
+    "en": "Physiotherapy",
+    "hi": "फिजियोथेरेपी",
+    "kn": "ಫಿಸಿಯೋಥೆರಪಿ",
+    "ml": "ഫിസിയോതെറാപ്പി",
+    "tcy": "ಫಿಸಿಯೋಥೆರಪಿ"
+   },
+   "keywords": {
+    "en": [
+     "physiotherapy",
+     "physio",
+     "physiotherapist",
+     "rehabilitation",
+     "rehab",
+     "exercise therapy"
+    ],
+    "hi": [
+     "फिजियोथेरेपी",
+     "फिजियो",
+     "पुनर्वास"
+    ],
+    "kn": [
+     "ಫಿಸಿಯೋಥೆರಪಿ",
+     "ಫಿಸಿಯೋ",
+     "ಪುನರ್ವಸತಿ"
+    ],
+    "ml": [
+     "ഫിസിയോതെറാപ്പി",
+     "ഫിസിയോ"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "dietetics",
+   "type": "department",
+   "available": true,
+   "verified": false,
+   "floor": 1,
+   "place": "Main Block, right wing",
+   "map_node": "dietetics",
+   "names": {
+    "en": "Dietetics & Nutrition",
+    "hi": "आहार विभाग",
+    "kn": "ಆಹಾರ ತಜ್ಞರ ವಿಭಾಗ",
+    "ml": "ഡയറ്റീഷ്യൻ",
+    "tcy": "ಡಯಟೀಷಿಯನ್"
+   },
+   "keywords": {
+    "en": [
+     "dietician",
+     "dietitian",
+     "dietetics",
+     "nutrition",
+     "diet",
+     "nutritionist"
+    ],
+    "hi": [
+     "डाइटिशियन",
+     "डाइट",
+     "पोषण",
+     "आहार"
+    ],
+    "kn": [
+     "ಡಯಟೀಷಿಯನ್",
+     "ಡಯಟ್",
+     "ಪೋಷಣೆ",
+     "ಆಹಾರ ತಜ್ಞ"
+    ],
+    "ml": [
+     "ഡയറ്റീഷ്യൻ",
+     "ഡയറ്റ്",
+     "പോഷകാഹാര"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "health_checkup",
+   "type": "department",
+   "available": true,
+   "verified": false,
+   "floor": 1,
+   "place": "Main Block, right wing",
+   "map_node": "health_checkup",
+   "names": {
+    "en": "Master Health Check-up",
+    "hi": "हेल्थ चेकअप",
+    "kn": "ಆರೋಗ್ಯ ತಪಾಸಣೆ",
+    "ml": "ഹെൽത്ത് ചെക്കപ്പ്",
+    "tcy": "ಹೆಲ್ತ್ ಚೆಕಪ್"
+   },
+   "keywords": {
+    "en": [
+     "health checkup",
+     "health check up",
+     "master health checkup",
+     "full body checkup",
+     "executive health",
+     "preventive health"
+    ],
+    "hi": [
+     "हेल्थ चेकअप",
+     "फुल बॉडी चेकअप",
+     "जांच पैकेज"
+    ],
+    "kn": [
+     "ಹೆಲ್ತ್ ಚೆಕಪ್",
+     "ಆರೋಗ್ಯ ತಪಾಸಣೆ",
+     "ಫುಲ್ ಬಾಡಿ ಚೆಕಪ್"
+    ],
+    "ml": [
+     "ഹെൽത്ത് ചെക്കപ്പ്",
+     "ഫുൾ ബോഡി ചെക്കപ്പ്",
+     "ആരോഗ്യ പരിശോധന"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "vaccination",
+   "type": "department",
+   "available": true,
+   "verified": false,
+   "floor": 1,
+   "place": "Main Block, right wing",
+   "map_node": "vaccination",
+   "names": {
+    "en": "Vaccination / Immunisation",
+    "hi": "टीकाकरण",
+    "kn": "ಲಸಿಕೆ ಕೇಂದ್ರ",
+    "ml": "വാക്സിനേഷൻ",
+    "tcy": "ವ್ಯಾಕ್ಸಿನೇಷನ್"
+   },
+   "keywords": {
+    "en": [
+     "vaccination",
+     "vaccine",
+     "immunization",
+     "immunisation",
+     "injection for baby"
+    ],
+    "hi": [
+     "टीकाकरण",
+     "टीका",
+     "वैक्सीन"
+    ],
+    "kn": [
+     "ಲಸಿಕೆ",
+     "ವ್ಯಾಕ್ಸಿನ್",
+     "ಚುಚ್ಚುಮದ್ದು"
+    ],
+    "ml": [
+     "വാക്സിനേഷൻ",
+     "വാക്സിൻ",
+     "കുത്തിവെപ്പ്",
+     "പ്രതിരോധ കുത്തിവയ്പ്പ്"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "injection_room",
+   "type": "department",
+   "available": true,
+   "verified": false,
+   "floor": 0,
+   "place": "Main Block, right wing",
+   "map_node": "injection_room",
+   "names": {
+    "en": "Injection & Dressing Room",
+    "hi": "इंजेक्शन / ड्रेसिंग रूम",
+    "kn": "ಇಂಜೆಕ್ಷನ್ / ಡ್ರೆಸ್ಸಿಂಗ್ ಕೊಠಡಿ",
+    "ml": "ഇഞ്ചക്ഷൻ / ഡ്രസ്സിംഗ് റൂം",
+    "tcy": "ಇಂಜೆಕ್ಷನ್ ರೂಮ್"
+   },
+   "keywords": {
+    "en": [
+     "injection room",
+     "injection",
+     "dressing",
+     "dressing room",
+     "minor procedure",
+     "iv",
+     "drip"
+    ],
+    "hi": [
+     "इंजेक्शन",
+     "ड्रेसिंग",
+     "पट्टी",
+     "ड्रिप"
+    ],
+    "kn": [
+     "ಇಂಜೆಕ್ಷನ್",
+     "ಡ್ರೆಸ್ಸಿಂಗ್",
+     "ಡ್ರಿಪ್"
+    ],
+    "ml": [
+     "ഇഞ്ചക്ഷൻ",
+     "ഡ്രസ്സിംഗ്",
+     "ഡ്രിപ്പ്"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "icu",
+   "type": "department",
+   "available": true,
+   "verified": false,
+   "floor": 4,
+   "place": "Main Block, left wing",
+   "map_node": "icu",
+   "names": {
+    "en": "ICU",
+    "hi": "आईसीयू",
+    "kn": "ಐಸಿಯು",
+    "ml": "ഐസിയു",
+    "tcy": "ಐಸಿಯು"
+   },
+   "keywords": {
+    "en": [
+     "icu",
+     "iccu",
+     "ccu",
+     "micu",
+     "sicu",
+     "intensive care",
+     "critical care"
+    ],
+    "hi": [
+     "आईसीयू",
+     "आईसीसीयू",
+     "सघन चिकित्सा"
+    ],
+    "kn": [
+     "ಐಸಿಯು",
+     "ಐಸಿಸಿಯು",
+     "ತೀವ್ರ ನಿಗಾ"
+    ],
+    "ml": [
+     "ഐസിയു",
+     "ഐസിസിയു",
+     "തീവ്രപരിചരണ"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "operation_theatre",
+   "type": "department",
+   "available": true,
+   "verified": false,
+   "floor": 4,
+   "place": "Main Block, right wing",
+   "map_node": "operation_theatre",
+   "names": {
+    "en": "Operation Theatre",
+    "hi": "ऑपरेशन थिएटर",
+    "kn": "ಶಸ್ತ್ರಚಿಕಿತ್ಸಾ ಕೊಠಡಿ",
+    "ml": "ഓപ്പറേഷൻ തിയേറ്റർ",
+    "tcy": "ಆಪರೇಷನ್ ಥಿಯೇಟರ್"
+   },
+   "keywords": {
+    "en": [
+     "operation theatre",
+     "operation theater",
+     "ot",
+     "surgery room",
+     "operation"
+    ],
+    "hi": [
+     "ऑपरेशन थिएटर",
+     "ओटी",
+     "ऑपरेशन"
+    ],
+    "kn": [
+     "ಆಪರೇಷನ್ ಥಿಯೇಟರ್",
+     "ಒಟಿ",
+     "ಆಪರೇಷನ್"
+    ],
+    "ml": [
+     "ഓപ്പറേഷൻ തിയേറ്റർ",
+     "ഒടി",
+     "ഓപ്പറേഷൻ"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "wards",
+   "type": "facility",
+   "available": true,
+   "verified": false,
+   "floor": 5,
+   "place": "Main Block, left wing",
+   "map_node": "wards",
+   "names": {
+    "en": "Wards & Patient Rooms",
+    "hi": "वार्ड",
+    "kn": "ವಾರ್ಡ್",
+    "ml": "വാർഡ്",
+    "tcy": "ವಾರ್ಡ್"
+   },
+   "keywords": {
+    "en": [
+     "ward",
+     "wards",
+     "general ward",
+     "patient room",
+     "room number",
+     "private room",
+     "inpatient",
+     "admitted patient",
+     "bed"
+    ],
+    "hi": [
+     "वार्ड",
+     "जनरल वार्ड",
+     "प्राइवेट रूम",
+     "मरीज का कमरा",
+     "बेड"
+    ],
+    "kn": [
+     "ವಾರ್ಡ್",
+     "ಜನರಲ್ ವಾರ್ಡ್",
+     "ಪ್ರೈವೇಟ್ ರೂಮ್",
+     "ರೋಗಿಯ ಕೊಠಡಿ",
+     "ಬೆಡ್"
+    ],
+    "ml": [
+     "വാർഡ്",
+     "ജനറൽ വാർഡ്",
+     "പ്രൈവറ്റ് റൂം",
+     "മുറി",
+     "ബെഡ്"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "laboratory",
+   "type": "department",
+   "available": true,
+   "verified": false,
+   "floor": 0,
+   "place": "Main Block, right wing",
+   "map_node": "laboratory",
+   "names": {
+    "en": "Laboratory",
+    "hi": "लैब",
+    "kn": "ಪ್ರಯೋಗಾಲಯ",
+    "ml": "ലാബ്",
+    "tcy": "ಲ್ಯಾಬ್"
+   },
+   "keywords": {
+    "en": [
+     "laboratory",
+     "lab",
+     "blood test",
+     "sample collection",
+     "urine test",
+     "test report",
+     "pathology",
+     "lab report",
+     "sugar test"
+    ],
+    "hi": [
+     "लैब",
+     "लेबोरेटरी",
+     "खून की जांच",
+     "ब्लड टेस्ट",
+     "सैंपल",
+     "पेशाब की जांच",
+     "रिपोर्ट"
+    ],
+    "kn": [
+     "ಲ್ಯಾಬ್",
+     "ಲ್ಯಾಬೊರೇಟರಿ",
+     "ಪ್ರಯೋಗಾಲಯ",
+     "ಬ್ಲಡ್ ಟೆಸ್ಟ್",
+     "ರಕ್ತ ಪರೀಕ್ಷೆ",
+     "ಸ್ಯಾಂಪಲ್",
+     "ರಿಪೋರ್ಟ್"
+    ],
+    "ml": [
+     "ലാബ്",
+     "ലബോറട്ടറി",
+     "ബ്ലഡ് ടെസ്റ്റ്",
+     "രക്ത പരിശോധന",
+     "സാമ്പിൾ",
+     "റിപ്പോർട്ട്"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "blood_bank",
+   "type": "department",
+   "available": true,
+   "verified": false,
+   "floor": -1,
+   "place": "Main Block, left wing",
+   "map_node": "blood_bank",
+   "names": {
+    "en": "Blood Bank",
+    "hi": "ब्लड बैंक",
+    "kn": "ರಕ್ತ ನಿಧಿ",
+    "ml": "ബ്ലഡ് ബാങ്ക്",
+    "tcy": "ಬ್ಲಡ್ ಬ್ಯಾಂಕ್"
+   },
+   "keywords": {
+    "en": [
+     "blood bank",
+     "blood donation",
+     "donate blood",
+     "blood donor",
+     "blood unit"
+    ],
+    "hi": [
+     "ब्लड बैंक",
+     "रक्त कोष",
+     "रक्तदान",
+     "खून दान"
+    ],
+    "kn": [
+     "ಬ್ಲಡ್ ಬ್ಯಾಂಕ್",
+     "ರಕ್ತ ನಿಧಿ",
+     "ರಕ್ತದಾನ"
+    ],
+    "ml": [
+     "ബ്ലഡ് ബാങ്ക്",
+     "രക്തബാങ്ക്",
+     "രക്തദാന"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "xray",
+   "type": "department",
+   "available": true,
+   "verified": false,
+   "floor": 0,
+   "place": "Main Block, right wing",
+   "map_node": "xray",
+   "names": {
+    "en": "X-Ray",
+    "hi": "एक्स-रे",
+    "kn": "ಎಕ್ಸ್-ರೇ",
+    "ml": "എക്സ്-റേ",
+    "tcy": "ಎಕ್ಸ್-ರೇ"
+   },
+   "keywords": {
+    "en": [
+     "x-ray",
+     "x ray",
+     "xray",
+     "radiology",
+     "radiography",
+     "digital x-ray"
+    ],
+    "hi": [
+     "एक्स-रे",
+     "एक्सरे",
+     "एक्स रे",
+     "रेडियोलॉजी"
+    ],
+    "kn": [
+     "ಎಕ್ಸ್-ರೇ",
+     "ಎಕ್ಸ್ ರೇ",
+     "ಎಕ್ಸರೆ",
+     "ರೇಡಿಯಾಲಜಿ"
+    ],
+    "ml": [
+     "എക്സ്-റേ",
+     "എക്സ് റേ",
+     "എക്സറേ",
+     "റേഡിയോളജി"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "ct_mri",
+   "type": "department",
+   "available": true,
+   "verified": false,
+   "floor": 0,
+   "place": "Main Block, right wing",
+   "map_node": "ct_mri",
+   "names": {
+    "en": "CT Scan & MRI",
+    "hi": "सीटी स्कैन / एमआरआई",
+    "kn": "ಸಿಟಿ ಸ್ಕ್ಯಾನ್ / ಎಂಆರ್ಐ",
+    "ml": "സിടി സ്കാൻ / എംആർഐ",
+    "tcy": "ಸಿಟಿ ಸ್ಕ್ಯಾನ್ / ಎಂಆರ್ಐ"
+   },
+   "keywords": {
+    "en": [
+     "ct scan",
+     "ct",
+     "mri",
+     "mri scan",
+     "scan",
+     "cat scan",
+     "pet scan"
+    ],
+    "hi": [
+     "सीटी स्कैन",
+     "सिटी स्कैन",
+     "एमआरआई",
+     "स्कैन"
+    ],
+    "kn": [
+     "ಸಿಟಿ ಸ್ಕ್ಯಾನ್",
+     "ಎಂಆರ್ಐ",
+     "ಸ್ಕ್ಯಾನ್",
+     "ಸ್ಕ್ಯಾನಿಂಗ್"
+    ],
+    "ml": [
+     "സിടി സ്കാൻ",
+     "സി ടി സ്കാൻ",
+     "എംആർഐ",
+     "സ്കാൻ",
+     "സ്കാനിംഗ്"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "ultrasound",
+   "type": "department",
+   "available": true,
+   "verified": false,
+   "floor": 0,
+   "place": "Main Block, right wing",
+   "map_node": "ultrasound",
+   "names": {
+    "en": "Ultrasound",
+    "hi": "अल्ट्रासाउंड",
+    "kn": "ಅಲ್ಟ್ರಾಸೌಂಡ್",
+    "ml": "അൾട്രാസൗണ്ട്",
+    "tcy": "ಅಲ್ಟ್ರಾಸೌಂಡ್"
+   },
+   "keywords": {
+    "en": [
+     "ultrasound",
+     "sonography",
+     "usg",
+     "ultra sound",
+     "doppler",
+     "pregnancy scan"
+    ],
+    "hi": [
+     "अल्ट्रासाउंड",
+     "सोनोग्राफी",
+     "यूएसजी"
+    ],
+    "kn": [
+     "ಅಲ್ಟ್ರಾಸೌಂಡ್",
+     "ಸೋನೋಗ್ರಫಿ",
+     "ಯುಎಸ್‌ಜಿ"
+    ],
+    "ml": [
+     "അൾട്രാസൗണ്ട്",
+     "സ്കാനിങ്",
+     "സോണോഗ്രാഫി",
+     "യുഎസ്ജി"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "pharmacy",
+   "type": "facility",
+   "available": true,
+   "verified": false,
+   "floor": 0,
+   "place": "Main Block, right wing",
+   "map_node": "pharmacy",
+   "names": {
+    "en": "Pharmacy",
+    "hi": "फार्मेसी",
+    "kn": "ಔಷಧಾಲಯ",
+    "ml": "ഫാർമസി",
+    "tcy": "ಫಾರ್ಮಸಿ"
+   },
+   "keywords": {
+    "en": [
+     "pharmacy",
+     "medicine",
+     "medicines",
+     "medical shop",
+     "medical store",
+     "tablets",
+     "chemist",
+     "drug store"
+    ],
+    "hi": [
+     "फार्मेसी",
+     "दवा",
+     "दवाई",
+     "दवाइयां",
+     "मेडिकल",
+     "मेडिकल स्टोर",
+     "केमिस्ट"
+    ],
+    "kn": [
+     "ಫಾರ್ಮಸಿ",
+     "ಔಷಧ",
+     "ಔಷಧಿ",
+     "ಮೆಡಿಕಲ್",
+     "ಮೆಡಿಕಲ್ ಶಾಪ್",
+     "ಮಾತ್ರೆ",
+     "ಮದ್ದು"
+    ],
+    "ml": [
+     "ഫാർമസി",
+     "മരുന്ന്",
+     "മെഡിക്കൽ",
+     "മെഡിക്കൽ ഷോപ്പ്",
+     "ഗുളിക"
+    ],
+    "tcy": [
+     "ಮರ್ದ್",
+     "ಮರ್ದು"
+    ]
+   },
+   "directions": {}
+  },
+  {
+   "id": "billing",
+   "type": "facility",
+   "available": true,
+   "verified": false,
+   "floor": 0,
+   "place": "Main Block, left wing",
+   "map_node": "billing",
+   "names": {
+    "en": "Billing & Cash Counter",
+    "hi": "बिलिंग काउंटर",
+    "kn": "ಬಿಲ್ಲಿಂಗ್ ಕೌಂಟರ್",
+    "ml": "ബില്ലിംഗ് കൗണ്ടർ",
+    "tcy": "ಬಿಲ್ಲಿಂಗ್ ಕೌಂಟರ್"
+   },
+   "keywords": {
+    "en": [
+     "billing",
+     "bill",
+     "cash counter",
+     "payment",
+     "pay",
+     "discharge",
+     "refund",
+     "cashier"
+    ],
+    "hi": [
+     "बिलिंग",
+     "बिल",
+     "कैश काउंटर",
+     "भुगतान",
+     "पेमेंट",
+     "डिस्चार्ज"
+    ],
+    "kn": [
+     "ಬಿಲ್ಲಿಂಗ್",
+     "ಬಿಲ್",
+     "ಕ್ಯಾಶ್ ಕೌಂಟರ್",
+     "ಪಾವತಿ",
+     "ಪೇಮೆಂಟ್",
+     "ಡಿಸ್ಚಾರ್ಜ್"
+    ],
+    "ml": [
+     "ബില്ലിംഗ്",
+     "ബിൽ",
+     "ക്യാഷ് കൗണ്ടർ",
+     "പേയ്മെന്റ്",
+     "ഡിസ്ചാർജ്"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "insurance",
+   "type": "facility",
+   "available": true,
+   "verified": false,
+   "floor": 0,
+   "place": "Main Block, left wing",
+   "map_node": "insurance",
+   "names": {
+    "en": "Insurance / TPA Desk",
+    "hi": "बीमा / टीपीए डेस्क",
+    "kn": "ವಿಮೆ / ಟಿಪಿಎ ಡೆಸ್ಕ್",
+    "ml": "ഇൻഷുറൻസ് / ടിപിഎ",
+    "tcy": "ಇನ್ಶೂರೆನ್ಸ್ ಡೆಸ್ಕ್"
+   },
+   "keywords": {
+    "en": [
+     "insurance",
+     "tpa",
+     "cashless",
+     "claim",
+     "ayushman",
+     "health card",
+     "scheme"
+    ],
+    "hi": [
+     "इंश्योरेंस",
+     "बीमा",
+     "टीपीए",
+     "कैशलेस",
+     "क्लेम",
+     "आयुष्मान"
+    ],
+    "kn": [
+     "ಇನ್ಶೂರೆನ್ಸ್",
+     "ವಿಮೆ",
+     "ಟಿಪಿಎ",
+     "ಕ್ಯಾಶ್‌ಲೆಸ್",
+     "ಕ್ಲೈಮ್",
+     "ಆಯುಷ್ಮಾನ್"
+    ],
+    "ml": [
+     "ഇൻഷുറൻസ്",
+     "ടിപിഎ",
+     "ക്യാഷ്‌ലെസ്",
+     "ക്ലെയിം",
+     "ആയുഷ്മാൻ"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "admission",
+   "type": "facility",
+   "available": true,
+   "verified": false,
+   "floor": 0,
+   "place": "Main Block, left wing",
+   "map_node": "admission",
+   "names": {
+    "en": "Admission Desk",
+    "hi": "भर्ती काउंटर",
+    "kn": "ದಾಖಲಾತಿ ಕೌಂಟರ್",
+    "ml": "അഡ്മിഷൻ കൗണ്ടർ",
+    "tcy": "ಅಡ್ಮಿಷನ್ ಕೌಂಟರ್"
+   },
+   "keywords": {
+    "en": [
+     "admission",
+     "admit",
+     "admission desk",
+     "ip admission",
+     "bed booking"
+    ],
+    "hi": [
+     "एडमिशन",
+     "भर्ती",
+     "एडमिट"
+    ],
+    "kn": [
+     "ಅಡ್ಮಿಷನ್",
+     "ದಾಖಲಾತಿ",
+     "ಅಡ್ಮಿಟ್"
+    ],
+    "ml": [
+     "അഡ്മിഷൻ",
+     "അഡ്മിറ്റ്",
+     "പ്രവേശന"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "medical_records",
+   "type": "facility",
+   "available": true,
+   "verified": false,
+   "floor": 1,
+   "place": "Main Block, right wing",
+   "map_node": "medical_records",
+   "names": {
+    "en": "Medical Records",
+    "hi": "मेडिकल रिकॉर्ड",
+    "kn": "ವೈದ್ಯಕೀಯ ದಾಖಲೆಗಳು",
+    "ml": "മെഡിക്കൽ റെക്കോർഡ്സ്",
+    "tcy": "ಮೆಡಿಕಲ್ ರೆಕಾರ್ಡ್ಸ್"
+   },
+   "keywords": {
+    "en": [
+     "medical records",
+     "records",
+     "mrd",
+     "case sheet",
+     "certificate",
+     "medical certificate",
+     "discharge summary"
+    ],
+    "hi": [
+     "मेडिकल रिकॉर्ड",
+     "रिकॉर्ड",
+     "प्रमाण पत्र",
+     "सर्टिफिकेट"
+    ],
+    "kn": [
+     "ಮೆಡಿಕಲ್ ರೆಕಾರ್ಡ್",
+     "ರೆಕಾರ್ಡ್",
+     "ದಾಖಲೆ",
+     "ಸರ್ಟಿಫಿಕೇಟ್",
+     "ಪ್ರಮಾಣಪತ್ರ"
+    ],
+    "ml": [
+     "മെഡിക്കൽ റെക്കോർഡ്",
+     "റെക്കോർഡ്",
+     "സർട്ടിഫിക്കറ്റ്"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "ambulance",
+   "type": "facility",
+   "available": true,
+   "verified": false,
+   "floor": 0,
+   "place": "Main Block, left wing",
+   "map_node": "ambulance",
+   "names": {
+    "en": "Ambulance Service",
+    "hi": "एम्बुलेंस",
+    "kn": "ಆಂಬ್ಯುಲೆನ್ಸ್",
+    "ml": "ആംബുലൻസ്",
+    "tcy": "ಆಂಬ್ಯುಲೆನ್ಸ್"
+   },
+   "keywords": {
+    "en": [
+     "ambulance",
+     "ambulance service",
+     "108"
+    ],
+    "hi": [
+     "एम्बुलेंस",
+     "एंबुलेंस"
+    ],
+    "kn": [
+     "ಆಂಬ್ಯುಲೆನ್ಸ್",
+     "ಅಂಬುಲೆನ್ಸ್"
+    ],
+    "ml": [
+     "ആംബുലൻസ്"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "mortuary",
+   "type": "facility",
+   "available": true,
+   "verified": false,
+   "floor": -1,
+   "place": "Main Block, left wing",
+   "map_node": "mortuary",
+   "names": {
+    "en": "Mortuary",
+    "hi": "शवगृह",
+    "kn": "ಶವಾಗಾರ",
+    "ml": "മോർച്ചറി",
+    "tcy": "ಮಾರ್ಚುರಿ"
+   },
+   "keywords": {
+    "en": [
+     "mortuary",
+     "morgue",
+     "dead body",
+     "post mortem",
+     "postmortem"
+    ],
+    "hi": [
+     "मोर्चरी",
+     "शवगृह",
+     "पोस्टमार्टम"
+    ],
+    "kn": [
+     "ಮಾರ್ಚುರಿ",
+     "ಶವಾಗಾರ",
+     "ಪೋಸ್ಟ್ ಮಾರ್ಟಮ್",
+     "ಶವ"
+    ],
+    "ml": [
+     "മോർച്ചറി",
+     "പോസ്റ്റ്മോർട്ടം",
+     "മൃതദേഹ"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "toilet",
+   "type": "facility",
+   "available": true,
+   "verified": false,
+   "floor": 0,
+   "place": "Main Block, next to the lifts on every floor",
+   "map_node": "toilet",
+   "names": {
+    "en": "Restrooms",
+    "hi": "शौचालय",
+    "kn": "ಶೌಚಾಲಯ",
+    "ml": "ശുചിമുറി",
+    "tcy": "ಟಾಯ್ಲೆಟ್"
+   },
+   "keywords": {
+    "en": [
+     "toilet",
+     "toilets",
+     "washroom",
+     "restroom",
+     "bathroom",
+     "loo",
+     "ladies toilet",
+     "gents toilet",
+     "urinal"
+    ],
+    "hi": [
+     "टॉयलेट",
+     "शौचालय",
+     "बाथरूम",
+     "वॉशरूम",
+     "पेशाबघर"
+    ],
+    "kn": [
+     "ಟಾಯ್ಲೆಟ್",
+     "ಶೌಚಾಲಯ",
+     "ಬಾತ್ರೂಮ್",
+     "ವಾಶ್‌ರೂಮ್",
+     "ಬಾತ್‌ರೂಮ್"
+    ],
+    "ml": [
+     "ടോയ്‌ലറ്റ്",
+     "ടോയ്ലറ്റ്",
+     "ശുചിമുറി",
+     "ബാത്ത്റൂം",
+     "വാഷ്റൂം",
+     "കക്കൂസ്"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "lift",
+   "type": "facility",
+   "available": true,
+   "verified": false,
+   "floor": 0,
+   "place": "Main Block, next to the lifts on every floor",
+   "map_node": "lift",
+   "names": {
+    "en": "Lifts",
+    "hi": "लिफ्ट",
+    "kn": "ಲಿಫ್ಟ್",
+    "ml": "ലിഫ്റ്റ്",
+    "tcy": "ಲಿಫ್ಟ್"
+   },
+   "keywords": {
+    "en": [
+     "lift",
+     "lifts",
+     "elevator",
+     "stairs",
+     "staircase",
+     "escalator",
+     "ramp"
+    ],
+    "hi": [
+     "लिफ्ट",
+     "एलिवेटर",
+     "सीढ़ी",
+     "सीढ़ियां",
+     "रैंप"
+    ],
+    "kn": [
+     "ಲಿಫ್ಟ್",
+     "ಮೆಟ್ಟಿಲು",
+     "ಎಲಿವೇಟರ್",
+     "ರ್ಯಾಂಪ್"
+    ],
+    "ml": [
+     "ലിഫ്റ്റ്",
+     "പടി",
+     "പടികൾ",
+     "എലിവേറ്റർ",
+     "റാമ്പ്"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "canteen",
+   "type": "facility",
+   "available": true,
+   "verified": false,
+   "floor": -1,
+   "place": "Main Block, left wing",
+   "map_node": "canteen",
+   "names": {
+    "en": "Canteen / Cafeteria",
+    "hi": "कैंटीन",
+    "kn": "ಕ್ಯಾಂಟೀನ್",
+    "ml": "കാന്റീൻ",
+    "tcy": "ಕ್ಯಾಂಟೀನ್"
+   },
+   "keywords": {
+    "en": [
+     "canteen",
+     "cafeteria",
+     "food",
+     "cafe",
+     "coffee",
+     "tea",
+     "hotel",
+     "eat",
+     "restaurant"
+    ],
+    "hi": [
+     "कैंटीन",
+     "खाना",
+     "चाय",
+     "कॉफी",
+     "कैफेटेरिया",
+     "नाश्ता"
+    ],
+    "kn": [
+     "ಕ್ಯಾಂಟೀನ್",
+     "ಊಟ",
+     "ಟೀ",
+     "ಕಾಫಿ",
+     "ತಿಂಡಿ",
+     "ಹೋಟೆಲ್"
+    ],
+    "ml": [
+     "കാന്റീൻ",
+     "ഭക്ഷണ",
+     "ചായ",
+     "കാപ്പി",
+     "ഹോട്ടൽ"
+    ],
+    "tcy": [
+     "ಚಾ",
+     "ಕಾಪಿ"
+    ]
+   },
+   "directions": {}
+  },
+  {
+   "id": "drinking_water",
+   "type": "facility",
+   "available": true,
+   "verified": false,
+   "floor": 0,
+   "place": "Main Block, next to the lifts on every floor",
+   "map_node": "drinking_water",
+   "names": {
+    "en": "Drinking Water",
+    "hi": "पीने का पानी",
+    "kn": "ಕುಡಿಯುವ ನೀರು",
+    "ml": "കുടിവെള്ളം",
+    "tcy": "ಪರ್ಪಿನ ನೀರ್"
+   },
+   "keywords": {
+    "en": [
+     "drinking water",
+     "water",
+     "water cooler",
+     "water filter"
+    ],
+    "hi": [
+     "पानी",
+     "पीने का पानी",
+     "वॉटर कूलर"
+    ],
+    "kn": [
+     "ನೀರು",
+     "ಕುಡಿಯುವ ನೀರು",
+     "ವಾಟರ್"
+    ],
+    "ml": [
+     "വെള്ളം",
+     "കുടിവെള്ള",
+     "വാട്ടർ"
+    ],
+    "tcy": [
+     "ನೀರ್"
+    ]
+   },
+   "directions": {}
+  },
+  {
+   "id": "atm",
+   "type": "facility",
+   "available": true,
+   "verified": false,
+   "floor": 0,
+   "place": "Main Block, left wing",
+   "map_node": "atm",
+   "names": {
+    "en": "ATM",
+    "hi": "एटीएम",
+    "kn": "ಎಟಿಎಂ",
+    "ml": "എടിഎം",
+    "tcy": "ಎಟಿಎಂ"
+   },
+   "keywords": {
+    "en": [
+     "atm",
+     "cash machine",
+     "withdraw money",
+     "bank"
+    ],
+    "hi": [
+     "एटीएम",
+     "पैसे निकालना",
+     "बैंक"
+    ],
+    "kn": [
+     "ಎಟಿಎಂ",
+     "ಎಟಿಎಮ್",
+     "ಬ್ಯಾಂಕ್"
+    ],
+    "ml": [
+     "എടിഎം",
+     "ബാങ്ക്"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "parking",
+   "type": "facility",
+   "available": true,
+   "verified": false,
+   "floor": -1,
+   "place": "Main Block, left wing",
+   "map_node": "parking",
+   "names": {
+    "en": "Parking",
+    "hi": "पार्किंग",
+    "kn": "ಪಾರ್ಕಿಂಗ್",
+    "ml": "പാർക്കിംഗ്",
+    "tcy": "ಪಾರ್ಕಿಂಗ್"
+   },
+   "keywords": {
+    "en": [
+     "parking",
+     "car parking",
+     "bike parking",
+     "vehicle",
+     "park my car"
+    ],
+    "hi": [
+     "पार्किंग",
+     "गाड़ी",
+     "कार पार्किंग"
+    ],
+    "kn": [
+     "ಪಾರ್ಕಿಂಗ್",
+     "ವಾಹನ",
+     "ಗಾಡಿ"
+    ],
+    "ml": [
+     "പാർക്കിംഗ്",
+     "വാഹന",
+     "വണ്ടി"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "exit",
+   "type": "facility",
+   "available": true,
+   "verified": false,
+   "floor": 0,
+   "place": "Main Block, west end of the ground floor",
+   "map_node": "exit",
+   "names": {
+    "en": "Main Entrance / Exit",
+    "hi": "मुख्य द्वार",
+    "kn": "ಮುಖ್ಯ ದ್ವಾರ",
+    "ml": "പ്രധാന കവാടം",
+    "tcy": "ಮೇನ್ ಗೇಟ್"
+   },
+   "keywords": {
+    "en": [
+     "exit",
+     "main gate",
+     "entrance",
+     "way out",
+     "main entrance",
+     "gate",
+     "auto stand",
+     "bus stop",
+     "taxi"
+    ],
+    "hi": [
+     "बाहर",
+     "एग्जिट",
+     "गेट",
+     "मेन गेट",
+     "मुख्य द्वार",
+     "ऑटो"
+    ],
+    "kn": [
+     "ಎಕ್ಸಿಟ್",
+     "ಗೇಟ್",
+     "ಮೇನ್ ಗೇಟ್",
+     "ಮುಖ್ಯ ದ್ವಾರ",
+     "ಹೊರಗೆ",
+     "ಆಟೋ"
+    ],
+    "ml": [
+     "എക്സിറ്റ്",
+     "ഗേറ്റ്",
+     "മെയിൻ ഗേറ്റ്",
+     "പ്രധാന കവാട",
+     "പുറത്ത്",
+     "ഓട്ടോ"
+    ],
+    "tcy": [
+     "ಪಿದಾಯಿ"
+    ]
+   },
+   "directions": {}
+  },
+  {
+   "id": "waiting_area",
+   "type": "facility",
+   "available": true,
+   "verified": false,
+   "floor": 0,
+   "place": "Main Block, left wing",
+   "map_node": "waiting_area",
+   "names": {
+    "en": "Waiting Area",
+    "hi": "प्रतीक्षा क्षेत्र",
+    "kn": "ಕಾಯುವ ಸ್ಥಳ",
+    "ml": "കാത്തിരിപ്പ് സ്ഥലം",
+    "tcy": "ವೇಟಿಂಗ್ ಏರಿಯಾ"
+   },
+   "keywords": {
+    "en": [
+     "waiting area",
+     "waiting room",
+     "waiting hall",
+     "sit",
+     "lounge"
+    ],
+    "hi": [
+     "वेटिंग",
+     "वेटिंग एरिया",
+     "प्रतीक्षा",
+     "बैठने"
+    ],
+    "kn": [
+     "ವೇಟಿಂಗ್",
+     "ವೇಟಿಂಗ್ ಏರಿಯಾ",
+     "ಕಾಯುವ",
+     "ಕುಳಿತುಕೊಳ್ಳಲು"
+    ],
+    "ml": [
+     "വെയിറ്റിംഗ്",
+     "വെയിറ്റിംഗ് ഏരിയ",
+     "കാത്തിരിപ്പ്",
+     "ഇരിക്കാൻ"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "wheelchair",
+   "type": "facility",
+   "available": true,
+   "verified": false,
+   "floor": 0,
+   "place": "Main Block, right wing",
+   "map_node": "wheelchair",
+   "names": {
+    "en": "Wheelchair & Stretcher",
+    "hi": "व्हीलचेयर",
+    "kn": "ವೀಲ್‌ಚೇರ್",
+    "ml": "വീൽചെയർ",
+    "tcy": "ವೀಲ್‌ಚೇರ್"
+   },
+   "keywords": {
+    "en": [
+     "wheelchair",
+     "wheel chair",
+     "stretcher",
+     "trolley"
+    ],
+    "hi": [
+     "व्हीलचेयर",
+     "व्हील चेयर",
+     "स्ट्रेचर"
+    ],
+    "kn": [
+     "ವೀಲ್‌ಚೇರ್",
+     "ವೀಲ್ ಚೇರ್",
+     "ಸ್ಟ್ರೆಚರ್"
+    ],
+    "ml": [
+     "വീൽചെയർ",
+     "വീൽ ചെയർ",
+     "സ്ട്രെച്ചർ"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "security",
+   "type": "facility",
+   "available": true,
+   "verified": false,
+   "floor": 0,
+   "place": "Main Block, right wing",
+   "map_node": "security",
+   "names": {
+    "en": "Security / Lost & Found",
+    "hi": "सुरक्षा",
+    "kn": "ಭದ್ರತೆ",
+    "ml": "സെക്യൂരിറ്റി",
+    "tcy": "ಸೆಕ್ಯುರಿಟಿ"
+   },
+   "keywords": {
+    "en": [
+     "security",
+     "lost and found",
+     "lost",
+     "police",
+     "guard"
+    ],
+    "hi": [
+     "सिक्योरिटी",
+     "सुरक्षा",
+     "खो गया",
+     "गार्ड",
+     "पुलिस"
+    ],
+    "kn": [
+     "ಸೆಕ್ಯುರಿಟಿ",
+     "ಭದ್ರತೆ",
+     "ಕಳೆದುಹೋಗಿದೆ",
+     "ಗಾರ್ಡ್",
+     "ಪೊಲೀಸ್"
+    ],
+    "ml": [
+     "സെക്യൂരിറ്റി",
+     "നഷ്ടപ്പെട്ടു",
+     "ഗാർഡ്",
+     "പോലീസ്"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "prayer_room",
+   "type": "facility",
+   "available": true,
+   "verified": false,
+   "floor": 1,
+   "place": "Main Block, right wing",
+   "map_node": "prayer_room",
+   "names": {
+    "en": "Prayer Room",
+    "hi": "प्रार्थना कक्ष",
+    "kn": "ಪ್ರಾರ್ಥನಾ ಕೊಠಡಿ",
+    "ml": "പ്രാർത്ഥനാ മുറി",
+    "tcy": "ಪ್ರಾರ್ಥನಾ ಕೊಠಡಿ"
+   },
+   "keywords": {
+    "en": [
+     "prayer room",
+     "prayer",
+     "chapel",
+     "temple",
+     "meditation room"
+    ],
+    "hi": [
+     "प्रार्थना",
+     "मंदिर",
+     "पूजा",
+     "नमाज"
+    ],
+    "kn": [
+     "ಪ್ರಾರ್ಥನೆ",
+     "ದೇವಸ್ಥಾನ",
+     "ಪೂಜೆ"
+    ],
+    "ml": [
+     "പ്രാർത്ഥന",
+     "അമ്പലം",
+     "പള്ളി"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "administration",
+   "type": "facility",
+   "available": true,
+   "verified": false,
+   "floor": 1,
+   "place": "Administrative Block",
+   "map_node": "administration",
+   "names": {
+    "en": "Administration Office",
+    "hi": "प्रशासन कार्यालय",
+    "kn": "ಆಡಳಿತ ಕಚೇರಿ",
+    "ml": "ഭരണ ഓഫീസ്",
+    "tcy": "ಆಡಳಿತ ಆಫೀಸ್"
+   },
+   "keywords": {
+    "en": [
+     "administration",
+     "admin office",
+     "admin",
+     "medical superintendent",
+     "director",
+     "ms office",
+     "management office",
+     "administrative office"
+    ],
+    "hi": [
+     "प्रशासन",
+     "एडमिन",
+     "मेडिकल सुपरिंटेंडेंट",
+     "निदेशक",
+     "प्रशासनिक कार्यालय"
+    ],
+    "kn": [
+     "ಆಡಳಿತ",
+     "ಅಡ್ಮಿನ್",
+     "ವೈದ್ಯಕೀಯ ಅಧೀಕ್ಷಕ",
+     "ನಿರ್ದೇಶಕ",
+     "ಆಡಳಿತ ಕಚೇರಿ"
+    ],
+    "ml": [
+     "ഭരണ",
+     "അഡ്മിൻ",
+     "മെഡിക്കൽ സൂപ്രണ്ട്",
+     "ഡയറക്ടർ",
+     "ഭരണ ഓഫീസ്"
+    ],
+    "tcy": [
+     "ಆಡಳಿತ",
+     "ಅಡ್ಮಿನ್"
+    ]
+   },
+   "directions": {}
+  },
+  {
+   "id": "hr",
+   "type": "facility",
+   "available": true,
+   "verified": false,
+   "floor": 1,
+   "place": "Administrative Block",
+   "map_node": "hr",
+   "names": {
+    "en": "Human Resources (HR)",
+    "hi": "मानव संसाधन (एचआर)",
+    "kn": "ಮಾನವ ಸಂಪನ್ಮೂಲ (ಎಚ್‌ಆರ್)",
+    "ml": "എച്ച്ആർ വിഭാഗം",
+    "tcy": "ಎಚ್‌ಆರ್"
+   },
+   "keywords": {
+    "en": [
+     "hr",
+     "human resources",
+     "hr department",
+     "recruitment",
+     "job interview",
+     "staff office"
+    ],
+    "hi": [
+     "एचआर",
+     "मानव संसाधन",
+     "भर्ती",
+     "नौकरी",
+     "इंटरव्यू"
+    ],
+    "kn": [
+     "ಎಚ್‌ಆರ್",
+     "ಮಾನವ ಸಂಪನ್ಮೂಲ",
+     "ನೇಮಕಾತಿ",
+     "ಉದ್ಯೋಗ",
+     "ಇಂಟರ್ವ್ಯೂ"
+    ],
+    "ml": [
+     "എച്ച്ആർ",
+     "മാനവ വിഭവശേഷി",
+     "റിക്രൂട്ട്മെന്റ്",
+     "ജോലി",
+     "ഇന്റർവ്യൂ"
+    ],
+    "tcy": [
+     "ಎಚ್‌ಆರ್"
+    ]
+   },
+   "directions": {}
+  },
+  {
+   "id": "accounts",
+   "type": "facility",
+   "available": true,
+   "verified": false,
+   "floor": 1,
+   "place": "Administrative Block",
+   "map_node": "accounts",
+   "names": {
+    "en": "Accounts & Finance",
+    "hi": "लेखा विभाग",
+    "kn": "ಲೆಕ್ಕಪತ್ರ ವಿಭಾಗ",
+    "ml": "അക്കൗണ്ട്സ് വിഭാഗം",
+    "tcy": "ಅಕೌಂಟ್ಸ್"
+   },
+   "keywords": {
+    "en": [
+     "accounts",
+     "finance",
+     "accountant",
+     "accounts department",
+     "salary"
+    ],
+    "hi": [
+     "अकाउंट्स",
+     "लेखा",
+     "वित्त",
+     "सैलरी"
+    ],
+    "kn": [
+     "ಅಕೌಂಟ್ಸ್",
+     "ಲೆಕ್ಕಪತ್ರ",
+     "ಹಣಕಾಸು",
+     "ಸಂಬಳ"
+    ],
+    "ml": [
+     "അക്കൗണ്ട്സ്",
+     "ധനകാര്യ",
+     "ശമ്പളം"
+    ],
+    "tcy": [
+     "ಅಕೌಂಟ್ಸ್"
+    ]
+   },
+   "directions": {}
+  },
+  {
+   "id": "nursing_office",
+   "type": "facility",
+   "available": true,
+   "verified": false,
+   "floor": 1,
+   "place": "Administrative Block",
+   "map_node": "nursing_office",
+   "names": {
+    "en": "Nursing Superintendent Office",
+    "hi": "नर्सिंग कार्यालय",
+    "kn": "ನರ್ಸಿಂಗ್ ಕಚೇರಿ",
+    "ml": "നഴ്സിംഗ് ഓഫീസ്",
+    "tcy": "ನರ್ಸಿಂಗ್ ಆಫೀಸ್"
+   },
+   "keywords": {
+    "en": [
+     "nursing office",
+     "nursing superintendent",
+     "matron",
+     "head nurse",
+     "chief nurse"
+    ],
+    "hi": [
+     "नर्सिंग ऑफिस",
+     "नर्सिंग अधीक्षक",
+     "मैट्रन",
+     "हेड नर्स"
+    ],
+    "kn": [
+     "ನರ್ಸಿಂಗ್ ಆಫೀಸ್",
+     "ನರ್ಸಿಂಗ್ ಅಧೀಕ್ಷಕ",
+     "ಮೇಟ್ರನ್",
+     "ಹೆಡ್ ನರ್ಸ್"
+    ],
+    "ml": [
+     "നഴ്സിംഗ് ഓഫീസ്",
+     "നഴ്സിംഗ് സൂപ്രണ്ട്",
+     "മേട്രൺ",
+     "ഹെഡ് നഴ്സ്"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "patient_relations",
+   "type": "facility",
+   "available": true,
+   "verified": false,
+   "floor": 0,
+   "place": "Administrative Block",
+   "map_node": "patient_relations",
+   "names": {
+    "en": "Patient Relations & Complaints",
+    "hi": "रोगी संबंध / शिकायत",
+    "kn": "ರೋಗಿ ಸಂಪರ್ಕ / ದೂರು",
+    "ml": "രോഗി സഹായം / പരാതി",
+    "tcy": "ದೂರು ಕೌಂಟರ್"
+   },
+   "keywords": {
+    "en": [
+     "patient relations",
+     "complaint",
+     "complaints",
+     "feedback",
+     "grievance",
+     "pro office",
+     "patient care desk"
+    ],
+    "hi": [
+     "शिकायत",
+     "फीडबैक",
+     "पेशेंट रिलेशन",
+     "शिकायत केंद्र"
+    ],
+    "kn": [
+     "ದೂರು",
+     "ಫೀಡ್‌ಬ್ಯಾಕ್",
+     "ರೋಗಿ ಸಂಪರ್ಕ"
+    ],
+    "ml": [
+     "പരാതി",
+     "ഫീഡ്ബാക്ക്",
+     "രോഗി സഹായ"
+    ],
+    "tcy": [
+     "ದೂರು"
+    ]
+   },
+   "directions": {}
+  },
+  {
+   "id": "conference_hall",
+   "type": "facility",
+   "available": true,
+   "verified": false,
+   "floor": 2,
+   "place": "Administrative Block",
+   "map_node": "conference_hall",
+   "names": {
+    "en": "Conference Hall",
+    "hi": "कॉन्फ्रेंस हॉल",
+    "kn": "ಕಾನ್ಫರೆನ್ಸ್ ಹಾಲ್",
+    "ml": "കോൺഫറൻസ് ഹാൾ",
+    "tcy": "ಕಾನ್ಫರೆನ್ಸ್ ಹಾಲ್"
+   },
+   "keywords": {
+    "en": [
+     "conference hall",
+     "conference room",
+     "meeting room",
+     "meeting hall",
+     "auditorium",
+     "seminar hall"
+    ],
+    "hi": [
+     "कॉन्फ्रेंस हॉल",
+     "मीटिंग रूम",
+     "सभागार",
+     "सेमिनार"
+    ],
+    "kn": [
+     "ಕಾನ್ಫರೆನ್ಸ್ ಹಾಲ್",
+     "ಮೀಟಿಂಗ್ ರೂಮ್",
+     "ಸಭಾಂಗಣ",
+     "ಸೆಮಿನಾರ್"
+    ],
+    "ml": [
+     "കോൺഫറൻസ് ഹാൾ",
+     "മീറ്റിംഗ് റൂം",
+     "ഓഡിറ്റോറിയം",
+     "സെമിനാർ"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "it_department",
+   "type": "facility",
+   "available": true,
+   "verified": false,
+   "floor": 2,
+   "place": "Administrative Block",
+   "map_node": "it_department",
+   "names": {
+    "en": "IT Department",
+    "hi": "आईटी विभाग",
+    "kn": "ಐಟಿ ವಿಭಾಗ",
+    "ml": "ഐടി വിഭാഗം",
+    "tcy": "ಐಟಿ ವಿಭಾಗ"
+   },
+   "keywords": {
+    "en": [
+     "it department",
+     "it support",
+     "it office",
+     "computer section",
+     "server room",
+     "information technology"
+    ],
+    "hi": [
+     "आईटी",
+     "कंप्यूटर विभाग"
+    ],
+    "kn": [
+     "ಐಟಿ",
+     "ಕಂಪ್ಯೂಟರ್ ವಿಭಾಗ"
+    ],
+    "ml": [
+     "ഐടി",
+     "കമ്പ്യൂട്ടർ വിഭാഗം"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  },
+  {
+   "id": "library",
+   "type": "facility",
+   "available": true,
+   "verified": false,
+   "floor": 2,
+   "place": "Administrative Block",
+   "map_node": "library",
+   "names": {
+    "en": "Medical Library & Training",
+    "hi": "पुस्तकालय एवं प्रशिक्षण",
+    "kn": "ಗ್ರಂಥಾಲಯ ಮತ್ತು ತರಬೇತಿ",
+    "ml": "ലൈബ്രറി & പരിശീലനം",
+    "tcy": "ಲೈಬ್ರರಿ"
+   },
+   "keywords": {
+    "en": [
+     "library",
+     "medical library",
+     "training room",
+     "training centre",
+     "books"
+    ],
+    "hi": [
+     "लाइब्रेरी",
+     "पुस्तकालय",
+     "ट्रेनिंग"
+    ],
+    "kn": [
+     "ಲೈಬ್ರರಿ",
+     "ಗ್ರಂಥಾಲಯ",
+     "ತರಬೇತಿ"
+    ],
+    "ml": [
+     "ലൈബ്രറി",
+     "ഗ്രന്ഥശാല",
+     "പരിശീലന"
+    ],
+    "tcy": []
+   },
+   "directions": {}
+  }
+ ]
+}

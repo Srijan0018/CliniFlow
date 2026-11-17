@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hospital Voice Navigation - Demo</title>
+  <style>
+    body{margin:0;background:#f5f7fa}
+    header{background:#0B6BCB;color:#fff;padding:14px 18px;font:600 18px system-ui}
+    .wrap{display:flex;flex-wrap:wrap;gap:16px;padding:12px;align-items:flex-start}
+    .voice{flex:1 1 340px;max-width:460px;background:#fff;border-radius:12px}
+    .map{flex:3 1 560px;background:#fff;border-radius:12px;padding:12px}
+  </style>
+</head>
+<body>
+  <header>City Hospital – Find your way</header>
+  <div class="wrap">
+    <div class="voice" id="hospital-voice"></div>
+    <div class="map" id="hospital-map"></div>
+  </div>
+
+  <script src="/web/voice-widget.js"></script>
+  <script src="/web/hospital-map.js"></script>
+  <script>
+    var map = HospitalMap.mount('#hospital-map', { layoutUrl: '/web/layout.json', lang: 'en' });
+
+    HospitalVoice.mount('#hospital-voice', {
+      apiUrl: window.location.origin,          // on your own website: 'https://YOUR-SERVER'
+      defaultLang: 'en',
+      onNavigate: function (dest) { map.route(dest.map_node); },   // "Show route" -> draw it on the map
+      onLanguageChange: function (lang) { map.setLang(lang); }
+    });
+  </script>
+</body>
+</html>

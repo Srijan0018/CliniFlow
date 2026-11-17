@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hospital Map</title>
+  <style>body{margin:0;padding:10px;background:#f5f7fa}</style>
+</head>
+<body>
+  <!-- Standalone map. URL options: map.html?to=pharmacy&from=reception&lang=kn
+       Use this page inside the mobile app with react-native-webview. -->
+  <div id="hospital-map"></div>
+  <script src="hospital-map.js"></script>
+  <script>
+    var q = new URLSearchParams(location.search);
+    var map = HospitalMap.mount('#hospital-map', { layoutUrl: 'layout.json', lang: q.get('lang') || 'en', from: q.get('from') });
+    if (q.get('to')) map.route(q.get('to'));
+    // The mobile app can also call: window.map.route('xray') via injectJavaScript
+    window.map = map;
+  </script>
+</body>
+</html>
